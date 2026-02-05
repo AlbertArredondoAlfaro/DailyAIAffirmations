@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		07DC28AC2F3488C300BC48C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07DC28962F3488C200BC48C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07DC289D2F3488C200BC48C6;
+			remoteInfo = "Daily AI Affirmations";
+		};
+		07DC28B62F3488C300BC48C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07DC28962F3488C200BC48C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07DC289D2F3488C200BC48C6;
+			remoteInfo = "Daily AI Affirmations";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07DC289E2F3488C200BC48C6 /* Daily AI Affirmations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily AI Affirmations.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07DC28AB2F3488C300BC48C6 /* Daily AI AffirmationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AI AffirmationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07DC28B52F3488C300BC48C6 /* Daily AI AffirmationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AI AffirmationsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		07DC28A02F3488C200BC48C6 /* Daily AI Affirmations */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Daily AI Affirmations";
+			sourceTree = "<group>";
+		};
+		07DC28AE2F3488C300BC48C6 /* Daily AI AffirmationsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Daily AI AffirmationsTests";
+			sourceTree = "<group>";
+		};
+		07DC28B82F3488C300BC48C6 /* Daily AI AffirmationsUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Daily AI AffirmationsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07DC289B2F3488C200BC48C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28A82F3488C300BC48C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28B22F3488C300BC48C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07DC28952F3488C200BC48C6 = {
+			isa = PBXGroup;
+			children = (
+				07DC28A02F3488C200BC48C6 /* Daily AI Affirmations */,
+				07DC28AE2F3488C300BC48C6 /* Daily AI AffirmationsTests */,
+				07DC28B82F3488C300BC48C6 /* Daily AI AffirmationsUITests */,
+				07DC289F2F3488C200BC48C6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07DC289F2F3488C200BC48C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07DC289E2F3488C200BC48C6 /* Daily AI Affirmations.app */,
+				07DC28AB2F3488C300BC48C6 /* Daily AI AffirmationsTests.xctest */,
+				07DC28B52F3488C300BC48C6 /* Daily AI AffirmationsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07DC289D2F3488C200BC48C6 /* Daily AI Affirmations */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07DC28BF2F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI Affirmations" */;
+			buildPhases = (
+				07DC289A2F3488C200BC48C6 /* Sources */,
+				07DC289B2F3488C200BC48C6 /* Frameworks */,
+				07DC289C2F3488C200BC48C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				07DC28A02F3488C200BC48C6 /* Daily AI Affirmations */,
+			);
+			name = "Daily AI Affirmations";
+			packageProductDependencies = (
+			);
+			productName = "Daily AI Affirmations";
+			productReference = 07DC289E2F3488C200BC48C6 /* Daily AI Affirmations.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07DC28AA2F3488C300BC48C6 /* Daily AI AffirmationsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07DC28C22F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI AffirmationsTests" */;
+			buildPhases = (
+				07DC28A72F3488C300BC48C6 /* Sources */,
+				07DC28A82F3488C300BC48C6 /* Frameworks */,
+				07DC28A92F3488C300BC48C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07DC28AD2F3488C300BC48C6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				07DC28AE2F3488C300BC48C6 /* Daily AI AffirmationsTests */,
+			);
+			name = "Daily AI AffirmationsTests";
+			packageProductDependencies = (
+			);
+			productName = "Daily AI AffirmationsTests";
+			productReference = 07DC28AB2F3488C300BC48C6 /* Daily AI AffirmationsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		07DC28B42F3488C300BC48C6 /* Daily AI AffirmationsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07DC28C52F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI AffirmationsUITests" */;
+			buildPhases = (
+				07DC28B12F3488C300BC48C6 /* Sources */,
+				07DC28B22F3488C300BC48C6 /* Frameworks */,
+				07DC28B32F3488C300BC48C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07DC28B72F3488C300BC48C6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				07DC28B82F3488C300BC48C6 /* Daily AI AffirmationsUITests */,
+			);
+			name = "Daily AI AffirmationsUITests";
+			packageProductDependencies = (
+			);
+			productName = "Daily AI AffirmationsUITests";
+			productReference = 07DC28B52F3488C300BC48C6 /* Daily AI AffirmationsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07DC28962F3488C200BC48C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					07DC289D2F3488C200BC48C6 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					07DC28AA2F3488C300BC48C6 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 07DC289D2F3488C200BC48C6;
+					};
+					07DC28B42F3488C300BC48C6 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 07DC289D2F3488C200BC48C6;
+					};
+				};
+			};
+			buildConfigurationList = 07DC28992F3488C200BC48C6 /* Build configuration list for PBXProject "Daily AI Affirmations" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07DC28952F3488C200BC48C6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 07DC289F2F3488C200BC48C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07DC289D2F3488C200BC48C6 /* Daily AI Affirmations */,
+				07DC28AA2F3488C300BC48C6 /* Daily AI AffirmationsTests */,
+				07DC28B42F3488C300BC48C6 /* Daily AI AffirmationsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07DC289C2F3488C200BC48C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28A92F3488C300BC48C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28B32F3488C300BC48C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07DC289A2F3488C200BC48C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28A72F3488C300BC48C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07DC28B12F3488C300BC48C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07DC28AD2F3488C300BC48C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07DC289D2F3488C200BC48C6 /* Daily AI Affirmations */;
+			targetProxy = 07DC28AC2F3488C300BC48C6 /* PBXContainerItemProxy */;
+		};
+		07DC28B72F3488C300BC48C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07DC289D2F3488C200BC48C6 /* Daily AI Affirmations */;
+			targetProxy = 07DC28B62F3488C300BC48C6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		07DC28BD2F3488C300BC48C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		07DC28BE2F3488C300BC48C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07DC28C02F3488C300BC48C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-Affirmations";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07DC28C12F3488C300BC48C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-Affirmations";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		07DC28C32F3488C300BC48C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-AffirmationsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily AI Affirmations.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Daily AI Affirmations";
+			};
+			name = Debug;
+		};
+		07DC28C42F3488C300BC48C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-AffirmationsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daily AI Affirmations.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Daily AI Affirmations";
+			};
+			name = Release;
+		};
+		07DC28C62F3488C300BC48C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-AffirmationsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Daily AI Affirmations";
+			};
+			name = Debug;
+		};
+		07DC28C72F3488C300BC48C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JALZNH8YW;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudio.Daily-AI-AffirmationsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Daily AI Affirmations";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07DC28992F3488C200BC48C6 /* Build configuration list for PBXProject "Daily AI Affirmations" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07DC28BD2F3488C300BC48C6 /* Debug */,
+				07DC28BE2F3488C300BC48C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07DC28BF2F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI Affirmations" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07DC28C02F3488C300BC48C6 /* Debug */,
+				07DC28C12F3488C300BC48C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07DC28C22F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI AffirmationsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07DC28C32F3488C300BC48C6 /* Debug */,
+				07DC28C42F3488C300BC48C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07DC28C52F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI AffirmationsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07DC28C62F3488C300BC48C6 /* Debug */,
+				07DC28C72F3488C300BC48C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07DC28962F3488C200BC48C6 /* Project object */;
+}
