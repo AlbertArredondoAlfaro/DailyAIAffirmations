@@ -9,9 +9,8 @@ import Testing
 @testable import Daily_AI_Affirmations
 
 struct Daily_AI_AffirmationsTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func catalogHasExpectedCounts() {
+        #expect(AffirmationCatalog.spanish.count == 100)
+        #expect(AffirmationCatalog.english.count == 100)
     }
-
 }

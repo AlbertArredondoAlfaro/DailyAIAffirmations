@@ -63,10 +63,11 @@ final class AffirmationViewModel {
     init(calendar: Calendar = .current, locale: Locale = .current) {
         self.calendar = calendar
         self.locale = locale
-        self.language = AffirmationSelector.language(for: locale)
+        let detectedLanguage = AffirmationSelector.language(for: locale)
+        self.language = detectedLanguage
         self.currentAffirmation = AffirmationSelector.dailyAffirmation(
             for: .now,
-            language: self.language,
+            language: detectedLanguage,
             calendar: calendar
         )
     }
