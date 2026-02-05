@@ -1,0 +1,15 @@
+"app_title" = "Daily AI Affirmations";
+"app_tagline" = "Respira. Conecta. Avanza.";
+"subtitle_today" = "Tu afirmación de hoy";
+"label_random" = "Aleatoria";
+"label_customize" = "Personalizar";
+"label_share" = "Compartir";
+"customize_title" = "Personalizar afirmación";
+"customize_name" = "Nombre";
+"customize_use_name" = "Usar nombre en la frase";
+"customize_save" = "Guardar";
+"customize_cancel" = "Cancelar";
+"customize_name_required" = "Escribe un nombre para continuar.";
+"widget_title" = "Afirmación diaria";
+"widget_short_title" = "Hoy";
+"widget_description" = "Una afirmación positiva cada día.";

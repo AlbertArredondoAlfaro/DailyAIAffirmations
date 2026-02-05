@@ -25,7 +25,7 @@ struct ContentView: View {
                 header
 
                 AffirmationCard(
-                    title: "Daily AI Affirmations",
+                    title: NSLocalizedString("app_title", comment: ""),
                     subtitle: model.subtitle,
                     text: model.displayAffirmation
                 )
@@ -67,7 +67,7 @@ struct ContentView: View {
     private var header: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Daily AI Affirmations")
+                Text(NSLocalizedString("app_title", comment: ""))
                     .font(.system(size: 30, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
 
@@ -95,7 +95,7 @@ struct ContentView: View {
         .buttonStyle(.plain)
         .foregroundStyle(.white)
         .glassCircle()
-        .accessibilityLabel(model.language == .spanish ? "Compartir" : "Share")
+        .accessibilityLabel(NSLocalizedString("label_share", comment: ""))
     }
 
     private var actionRow: some View {
@@ -163,7 +163,7 @@ struct ContentView: View {
 
     private func renderShareImage() -> UIImage? {
         let renderer = ImageRenderer(content: ShareCardView(
-            title: "Daily AI Affirmations",
+            title: NSLocalizedString("app_title", comment: ""),
             subtitle: model.subtitle,
             text: model.displayAffirmation
         ))

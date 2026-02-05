@@ -1,0 +1,15 @@
+"app_title" = "Daily AI Affirmations";
+"app_tagline" = "Breathe. Connect. Move forward.";
+"subtitle_today" = "Your affirmation for today";
+"label_random" = "Random";
+"label_customize" = "Customize";
+"label_share" = "Share";
+"customize_title" = "Customize affirmation";
+"customize_name" = "Name";
+"customize_use_name" = "Use name in affirmation";
+"customize_save" = "Save";
+"customize_cancel" = "Cancel";
+"customize_name_required" = "Enter a name to continue.";
+"widget_title" = "Daily affirmation";
+"widget_short_title" = "Today";
+"widget_description" = "A positive affirmation each day.";
