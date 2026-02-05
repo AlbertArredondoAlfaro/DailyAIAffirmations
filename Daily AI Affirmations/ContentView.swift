@@ -13,6 +13,9 @@ struct ContentView: View {
     @Environment(\.displayScale) private var displayScale
     @State private var model = AffirmationViewModel()
     @State private var shareItem: ShareItem?
+    @State private var isCustomizePresented = false
+    @State private var draftName = ""
+    @State private var draftUseName = false
 
     var body: some View {
         ZStack {
@@ -24,7 +27,7 @@ struct ContentView: View {
                 AffirmationCard(
                     title: "Daily AI Affirmations",
                     subtitle: model.subtitle,
-                    text: model.currentAffirmation
+                    text: model.displayAffirmation
                 )
 
                 actionRow
@@ -44,6 +47,20 @@ struct ContentView: View {
         }
         .sheet(item: $shareItem) { item in
             ShareSheet(items: [item.image])
+        }
+        .sheet(isPresented: $isCustomizePresented) {
+            CustomizationSheet(
+                title: model.customizeTitle,
+                nameLabel: model.nameLabel,
+                useNameLabel: model.useNameLabel,
+                saveLabel: model.saveLabel,
+                cancelLabel: model.cancelLabel,
+                validationMessage: model.nameValidationMessage,
+                name: $draftName,
+                useName: $draftUseName
+            ) {
+                model.saveCustomization(name: draftName, useName: draftUseName)
+            }
         }
     }
 
@@ -97,7 +114,11 @@ struct ContentView: View {
                         .accessibilityLabel(model.randomLabel)
                         .buttonStyle(.glassProminent)
 
-                        Button { }
+                        Button {
+                            draftName = model.customName
+                            draftUseName = model.useCustomName
+                            isCustomizePresented = true
+                        }
                         label: {
                             Label(model.customizeLabel, systemImage: "pencil")
                                 .font(.system(size: 16, weight: .semibold, design: .rounded))
@@ -121,7 +142,11 @@ struct ContentView: View {
                     .accessibilityLabel(model.randomLabel)
                     .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
 
-                    Button { }
+                    Button {
+                        draftName = model.customName
+                        draftUseName = model.useCustomName
+                        isCustomizePresented = true
+                    }
                     label: {
                         Label(model.customizeLabel, systemImage: "pencil")
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
@@ -140,10 +165,73 @@ struct ContentView: View {
         let renderer = ImageRenderer(content: ShareCardView(
             title: "Daily AI Affirmations",
             subtitle: model.subtitle,
-            text: model.currentAffirmation
+            text: model.displayAffirmation
         ))
         renderer.scale = displayScale
         return renderer.uiImage
+    }
+}
+
+private struct CustomizationSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let title: String
+    let nameLabel: String
+    let useNameLabel: String
+    let saveLabel: String
+    let cancelLabel: String
+    let validationMessage: String
+    @Binding var name: String
+    @Binding var useName: Bool
+    let onSave: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField(nameLabel, text: $name)
+                        .textInputAutocapitalization(.words)
+                        .disableAutocorrection(true)
+
+                    if isNameInvalid {
+                        Text(validationMessage)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                Section {
+                    Toggle(useNameLabel, isOn: $useName)
+                }
+            }
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(cancelLabel) {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(saveLabel) {
+                        onSave()
+                        dismiss()
+                    }
+                    .disabled(isSaveDisabled)
+                }
+            }
+        }
+    }
+
+    private var trimmedName: String {
+        name.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var isNameInvalid: Bool {
+        useName && trimmedName.isEmpty
+    }
+
+    private var isSaveDisabled: Bool {
+        isNameInvalid
     }
 }
 

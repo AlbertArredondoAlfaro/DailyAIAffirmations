@@ -22,13 +22,17 @@ enum AffirmationSelector {
         return (languageCode == "es" && isSpain) ? .spanish : .english
     }
 
-    static func catalog(for language: AffirmationLanguage) -> [String] {
+    static func catalog(for language: AffirmationLanguage, allowPlaceholders: Bool = true) -> [String] {
+        let list: [String]
         switch language {
         case .spanish:
-            return AffirmationCatalog.spanish
+            list = AffirmationCatalog.spanish
         case .english:
-            return AffirmationCatalog.english
+            list = AffirmationCatalog.english
         }
+
+        guard !allowPlaceholders else { return list }
+        return list.filter { !$0.contains("{name}") }
     }
 
     static func dailyIndex(for date: Date, count: Int, calendar: Calendar = .current) -> Int {
@@ -40,16 +44,17 @@ enum AffirmationSelector {
     static func dailyAffirmation(
         for date: Date,
         language: AffirmationLanguage,
+        allowPlaceholders: Bool = true,
         calendar: Calendar = .current
     ) -> String {
-        let list = catalog(for: language)
+        let list = catalog(for: language, allowPlaceholders: allowPlaceholders)
         guard !list.isEmpty else { return "" }
         let index = dailyIndex(for: date, count: list.count, calendar: calendar)
         return list[index]
     }
 
-    static func randomAffirmation(language: AffirmationLanguage) -> String {
-        let list = catalog(for: language)
+    static func randomAffirmation(language: AffirmationLanguage, allowPlaceholders: Bool = true) -> String {
+        let list = catalog(for: language, allowPlaceholders: allowPlaceholders)
         return list.randomElement() ?? ""
     }
 }

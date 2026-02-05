@@ -23,21 +23,21 @@ struct Provider: TimelineProvider {
         let language = AffirmationSelector.language(for: .current)
         return AffirmationEntry(
             date: .now,
-            affirmation: AffirmationSelector.catalog(for: language).first ?? "",
+            affirmation: AffirmationSelector.catalog(for: language, allowPlaceholders: false).first ?? "",
             language: language
         )
     }
 
     func getSnapshot(in context: Context, completion: @escaping (AffirmationEntry) -> Void) {
         let language = AffirmationSelector.language(for: .current)
-        let affirmation = AffirmationSelector.dailyAffirmation(for: .now, language: language)
+        let affirmation = AffirmationSelector.dailyAffirmation(for: .now, language: language, allowPlaceholders: false)
         completion(AffirmationEntry(date: .now, affirmation: affirmation, language: language))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AffirmationEntry>) -> Void) {
         let language = AffirmationSelector.language(for: .current)
         let now = Date()
-        let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language)
+        let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language, allowPlaceholders: false)
         let entry = AffirmationEntry(date: now, affirmation: affirmation, language: language)
 
         let calendar = Calendar.current
