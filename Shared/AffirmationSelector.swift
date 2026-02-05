@@ -14,8 +14,12 @@ enum AffirmationLanguage {
 
 enum AffirmationSelector {
     static func language(for locale: Locale) -> AffirmationLanguage {
-        let code = locale.language.languageCode?.identifier ?? "en"
-        return code.hasPrefix("es") ? .spanish : .english
+        let languageCode = locale.language.languageCode?.identifier ?? "en"
+        let regionCode = locale.region?.identifier ?? ""
+        let identifier = locale.identifier
+
+        let isSpain = regionCode == "ES" || identifier.hasPrefix("es_ES")
+        return (languageCode == "es" && isSpain) ? .spanish : .english
     }
 
     static func catalog(for language: AffirmationLanguage) -> [String] {
