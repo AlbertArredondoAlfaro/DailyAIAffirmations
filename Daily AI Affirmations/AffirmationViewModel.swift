@@ -44,43 +44,43 @@ final class AffirmationViewModel {
     }
 
     var subtitle: String {
-        language == .spanish ? "Tu afirmación de hoy" : "Your affirmation for today"
+        NSLocalizedString("subtitle_today", comment: "")
     }
 
     var tagline: String {
-        language == .spanish ? "Respira. Conecta. Avanza." : "Breathe. Connect. Move forward."
+        NSLocalizedString("app_tagline", comment: "")
     }
 
     var randomLabel: String {
-        language == .spanish ? "Aleatoria" : "Random"
+        NSLocalizedString("label_random", comment: "")
     }
 
     var customizeLabel: String {
-        language == .spanish ? "Personalizar" : "Customize"
+        NSLocalizedString("label_customize", comment: "")
     }
 
     var customizeTitle: String {
-        language == .spanish ? "Personalizar afirmación" : "Customize affirmation"
+        NSLocalizedString("customize_title", comment: "")
     }
 
     var nameLabel: String {
-        language == .spanish ? "Nombre" : "Name"
+        NSLocalizedString("customize_name", comment: "")
     }
 
     var useNameLabel: String {
-        language == .spanish ? "Usar nombre en la frase" : "Use name in affirmation"
+        NSLocalizedString("customize_use_name", comment: "")
     }
 
     var saveLabel: String {
-        language == .spanish ? "Guardar" : "Save"
+        NSLocalizedString("customize_save", comment: "")
     }
 
     var cancelLabel: String {
-        language == .spanish ? "Cancelar" : "Cancel"
+        NSLocalizedString("customize_cancel", comment: "")
     }
 
     var nameValidationMessage: String {
-        language == .spanish ? "Escribe un nombre para continuar." : "Enter a name to continue."
+        NSLocalizedString("customize_name_required", comment: "")
     }
 
     var displayAffirmation: String {

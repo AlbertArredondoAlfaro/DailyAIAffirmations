@@ -10,11 +10,11 @@ import SwiftUI
 
 private enum WidgetStrings {
     static func title(for language: AffirmationLanguage) -> String {
-        language == .spanish ? "Afirmación diaria" : "Daily affirmation"
+        NSLocalizedString("widget_title", comment: "")
     }
 
     static func shortTitle(for language: AffirmationLanguage) -> String {
-        language == .spanish ? "Hoy" : "Today"
+        NSLocalizedString("widget_short_title", comment: "")
     }
 }
 
@@ -139,7 +139,7 @@ struct Daily_AI_Affirmations_Widget: Widget {
                 .widgetBackground()
         }
         .configurationDisplayName("Daily AI Affirmations")
-        .description("Una afirmación positiva cada día.")
+        .description(NSLocalizedString("widget_description", comment: ""))
         .supportedFamilies([
             .systemSmall,
             .systemMedium,
