@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.displayScale) private var displayScale
     @State private var model = AffirmationViewModel()
+    @State private var shareItem: ShareItem?
 
     var body: some View {
         ZStack {
@@ -39,19 +42,43 @@ struct ContentView: View {
             guard newPhase == .active else { return }
             model.loadDaily()
         }
+        .sheet(item: $shareItem) { item in
+            ShareSheet(items: [item.image])
+        }
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Daily AI Affirmations")
-                .font(.system(size: 30, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white)
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Daily AI Affirmations")
+                    .font(.system(size: 30, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
 
-            Text(model.tagline)
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundStyle(.white.opacity(0.8))
+                Text(model.tagline)
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.8))
+            }
+
+            Spacer(minLength: 12)
+
+            shareButton
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var shareButton: some View {
+        Button {
+            guard let image = renderShareImage() else { return }
+            shareItem = ShareItem(image: image)
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+                .font(.system(size: 18, weight: .semibold))
+                .frame(width: 44, height: 44)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.white)
+        .glassCircle()
+        .accessibilityLabel(model.language == .spanish ? "Compartir" : "Share")
     }
 
     private var actionRow: some View {
@@ -108,6 +135,36 @@ struct ContentView: View {
         }
         .foregroundStyle(.white)
     }
+
+    private func renderShareImage() -> UIImage? {
+        let renderer = ImageRenderer(content: ShareCardView(
+            title: "Daily AI Affirmations",
+            subtitle: model.subtitle,
+            text: model.currentAffirmation
+        ))
+        renderer.scale = displayScale
+        return renderer.uiImage
+    }
+}
+
+private struct ShareCardView: View {
+    let title: String
+    let subtitle: String
+    let text: String
+
+    var body: some View {
+        ZStack {
+            AppBackground()
+            AffirmationCard(title: title, subtitle: subtitle, text: text)
+                .padding(24)
+        }
+        .frame(width: 720, height: 720)
+    }
+}
+
+private struct ShareItem: Identifiable {
+    let id = UUID()
+    let image: UIImage
 }
 
 private struct AffirmationCard: View {
@@ -198,6 +255,17 @@ private extension View {
         } else {
             self
                 .background(.ultraThinMaterial, in: .rect(cornerRadius: cornerRadius))
+        }
+    }
+
+    @ViewBuilder
+    func glassCircle() -> some View {
+        if #available(iOS 26, *) {
+            self
+                .glassEffect(.regular.interactive(), in: .circle)
+        } else {
+            self
+                .background(.ultraThinMaterial, in: Circle())
         }
     }
 }
