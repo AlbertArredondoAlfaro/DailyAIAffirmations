@@ -38,12 +38,18 @@ struct ContentView: View {
             .padding(.top, 28)
             .padding(.bottom, 32)
         }
+        .safeAreaInset(edge: .bottom) {
+            BannerAdContainer(adUnitID: AdMobConstants.bannerAdUnitID)
+                .padding(.horizontal, 22)
+                .padding(.vertical, 12)
+        }
         .task {
             model.loadDaily()
         }
         .onChange(of: scenePhase) { _, newPhase in
             guard newPhase == .active else { return }
             model.loadDaily()
+            RewardedAdManager.shared.appDidBecomeActive()
         }
         .sheet(item: $shareItem) { item in
             ShareSheet(items: [item.image])
@@ -160,6 +166,7 @@ struct ContentView: View {
         }
         .foregroundStyle(.white)
     }
+
 
     private func renderShareImage() -> UIImage? {
         let renderer = ImageRenderer(content: ShareCardView(
