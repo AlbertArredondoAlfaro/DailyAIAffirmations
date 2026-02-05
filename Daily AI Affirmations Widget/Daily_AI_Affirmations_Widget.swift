@@ -58,6 +58,11 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
+        content
+    }
+
+    @ViewBuilder
+    private var content: some View {
         switch family {
         case .systemSmall:
             smallBody
@@ -109,7 +114,7 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
     }
 
     private var card: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: 8) {
             Text(WidgetStrings.title(for: entry.language))
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.7))
@@ -121,7 +126,7 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .glassCard(cornerRadius: 18)
+        .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
     }
 }
 
