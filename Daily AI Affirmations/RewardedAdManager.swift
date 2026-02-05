@@ -16,21 +16,17 @@ final class RewardedAdManager: NSObject {
     private var rewardedAd: RewardedAd?
     private var isLoading = false
     private var lastCountedAt: Date?
-    private let openCountKey = "admob.rewarded.openCount"
     private let defaults = UserDefaults.standard
+    private let policy = RewardedAdPolicy(openCountKey: "admob.rewarded.openCount")
 
     func appDidBecomeActive() {
-        if let lastCountedAt, Date().timeIntervalSince(lastCountedAt) < 1.0 {
+        let action = policy.handleOpen(now: Date(), lastCountedAt: &lastCountedAt, defaults: defaults)
+        switch action {
+        case .ignore:
             return
-        }
-        lastCountedAt = Date()
-
-        let nextCount = defaults.integer(forKey: openCountKey) + 1
-        defaults.set(nextCount, forKey: openCountKey)
-
-        if nextCount % 5 == 0 {
+        case .present:
             presentIfReady()
-        } else {
+        case .load:
             loadIfNeeded()
         }
     }
@@ -82,6 +78,28 @@ final class RewardedAdManager: NSObject {
             .flatMap { $0.windows }
             .first { $0.isKeyWindow }?
             .rootViewController
+    }
+}
+
+enum RewardedAdAction {
+    case ignore
+    case load
+    case present
+}
+
+struct RewardedAdPolicy {
+    let openCountKey: String
+    let cooldown: TimeInterval = 1.0
+
+    func handleOpen(now: Date, lastCountedAt: inout Date?, defaults: UserDefaults) -> RewardedAdAction {
+        if let lastCountedAt, now.timeIntervalSince(lastCountedAt) < cooldown {
+            return .ignore
+        }
+
+        lastCountedAt = now
+        let nextCount = defaults.integer(forKey: openCountKey) + 1
+        defaults.set(nextCount, forKey: openCountKey)
+        return (nextCount % 5 == 0) ? .present : .load
     }
 }
 

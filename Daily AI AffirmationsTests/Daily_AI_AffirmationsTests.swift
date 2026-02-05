@@ -10,7 +10,7 @@ import Testing
 
 struct Daily_AI_AffirmationsTests {
     @Test func catalogHasExpectedCounts() {
-        #expect(AffirmationCatalog.spanish.count == 100)
-        #expect(AffirmationCatalog.english.count == 100)
+        #expect(AffirmationCatalog.spanish.count == 365)
+        #expect(AffirmationCatalog.english.count == 365)
     }
 }
