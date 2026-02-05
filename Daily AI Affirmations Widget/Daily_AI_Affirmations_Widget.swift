@@ -16,6 +16,10 @@ private enum WidgetStrings {
     static func shortTitle(for language: AffirmationLanguage) -> String {
         language == .spanish ? "Hoy" : "Today"
     }
+
+    static func fallback(for language: AffirmationLanguage) -> String {
+        language == .spanish ? "Respira y vuelve en un momento." : "Breathe and check back soon."
+    }
 }
 
 struct Provider: TimelineProvider {
@@ -30,20 +34,25 @@ struct Provider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (AffirmationEntry) -> Void) {
         let language = AffirmationSelector.language(for: .current)
-        let affirmation = AffirmationSelector.dailyAffirmation(for: .now, language: language)
+        let affirmation = resolveAffirmation(for: .now, language: language)
         completion(AffirmationEntry(date: .now, affirmation: affirmation, language: language))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AffirmationEntry>) -> Void) {
         let language = AffirmationSelector.language(for: .current)
         let now = Date()
-        let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language)
+        let affirmation = resolveAffirmation(for: now, language: language)
         let entry = AffirmationEntry(date: now, affirmation: affirmation, language: language)
 
         let calendar = Calendar.current
         let startOfTomorrow = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: now) ?? now)
         let timeline = Timeline(entries: [entry], policy: .after(startOfTomorrow))
         completion(timeline)
+    }
+
+    private func resolveAffirmation(for date: Date, language: AffirmationLanguage) -> String {
+        let value = AffirmationSelector.dailyAffirmation(for: date, language: language)
+        return value.isEmpty ? WidgetStrings.fallback(for: language) : value
     }
 }
 
@@ -58,6 +67,11 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
+        content
+    }
+
+    @ViewBuilder
+    private var content: some View {
         switch family {
         case .systemSmall:
             smallBody
@@ -88,7 +102,7 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
                 .font(.caption2)
                 .foregroundStyle(.secondary)
 
-            Text(entry.affirmation)
+            Text(entry.affirmation.isEmpty ? WidgetStrings.fallback(for: entry.language) : entry.affirmation)
                 .font(.caption)
                 .lineLimit(2)
         }
@@ -103,25 +117,26 @@ struct Daily_AI_Affirmations_WidgetEntryView: View {
     }
 
     private var inlineBody: some View {
-        Text(entry.affirmation)
+        Text(entry.affirmation.isEmpty ? WidgetStrings.fallback(for: entry.language) : entry.affirmation)
             .font(.caption2)
             .lineLimit(1)
     }
 
     private var card: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        let text = entry.affirmation.isEmpty ? WidgetStrings.fallback(for: entry.language) : entry.affirmation
+        return VStack(alignment: .leading, spacing: 8) {
             Text(WidgetStrings.title(for: entry.language))
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.7))
 
-            Text(entry.affirmation)
+            Text(text)
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
                 .lineLimit(4)
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .glassCard(cornerRadius: 18)
+        .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
     }
 }
 
