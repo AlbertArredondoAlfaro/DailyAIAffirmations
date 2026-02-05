@@ -1,0 +1,6 @@
+framework module Pods_Daily_AI_Affirmations {
+  umbrella header "Pods-Daily AI Affirmations-umbrella.h"
+
+  export *
+  module * { export * }
+}

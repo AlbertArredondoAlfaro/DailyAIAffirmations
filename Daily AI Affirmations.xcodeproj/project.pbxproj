@@ -10,6 +10,7 @@
 		07DC28CF2F348A3100BC48C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28CE2F348A3100BC48C6 /* WidgetKit.framework */; };
 		07DC28D12F348A3100BC48C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28D02F348A3100BC48C6 /* SwiftUI.framework */; };
 		07DC28E02F348A3200BC48C6 /* Daily AI Affirmations WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 07DC28CC2F348A3100BC48C6 /* Daily AI Affirmations WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BCAB228E03E327E32480FBC7 /* Pods_Daily_AI_Affirmations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB9C994057D6D683DD99D20 /* Pods_Daily_AI_Affirmations.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,9 @@
 		07DC28CC2F348A3100BC48C6 /* Daily AI Affirmations WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Daily AI Affirmations WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC28CE2F348A3100BC48C6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		07DC28D02F348A3100BC48C6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AD6A70EC59E90E944BBC9E11 /* Pods-Daily AI Affirmations.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Daily AI Affirmations.release.xcconfig"; path = "Target Support Files/Pods-Daily AI Affirmations/Pods-Daily AI Affirmations.release.xcconfig"; sourceTree = "<group>"; };
+		CF65419BC79A9329E4F40D15 /* Pods-Daily AI Affirmations.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Daily AI Affirmations.debug.xcconfig"; path = "Target Support Files/Pods-Daily AI Affirmations/Pods-Daily AI Affirmations.debug.xcconfig"; sourceTree = "<group>"; };
+		ECB9C994057D6D683DD99D20 /* Pods_Daily_AI_Affirmations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Daily_AI_Affirmations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCAB228E03E327E32480FBC7 /* Pods_Daily_AI_Affirmations.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +149,7 @@
 				07DC28D22F348A3100BC48C6 /* Daily AI Affirmations Widget */,
 				07DC28CD2F348A3100BC48C6 /* Frameworks */,
 				07DC289F2F3488C200BC48C6 /* Products */,
+				292755068A74E53EDB616CD0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,8 +169,18 @@
 			children = (
 				07DC28CE2F348A3100BC48C6 /* WidgetKit.framework */,
 				07DC28D02F348A3100BC48C6 /* SwiftUI.framework */,
+				ECB9C994057D6D683DD99D20 /* Pods_Daily_AI_Affirmations.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		292755068A74E53EDB616CD0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF65419BC79A9329E4F40D15 /* Pods-Daily AI Affirmations.debug.xcconfig */,
+				AD6A70EC59E90E944BBC9E11 /* Pods-Daily AI Affirmations.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,10 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07DC28BF2F3488C300BC48C6 /* Build configuration list for PBXNativeTarget "Daily AI Affirmations" */;
 			buildPhases = (
+				BDEA950764A757231B99037A /* [CP] Check Pods Manifest.lock */,
 				07DC289A2F3488C200BC48C6 /* Sources */,
 				07DC289B2F3488C200BC48C6 /* Frameworks */,
 				07DC289C2F3488C200BC48C6 /* Resources */,
 				07DC28E52F348A3200BC48C6 /* Embed Foundation Extensions */,
+				D1980E3C7F74EE8C62155140 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,8 +207,6 @@
 				D626ACF197B005ADCBEE4512 /* Shared */,
 			);
 			name = "Daily AI Affirmations";
-			packageProductDependencies = (
-			);
 			productName = "Daily AI Affirmations";
 			productReference = 07DC289E2F3488C200BC48C6 /* Daily AI Affirmations.app */;
 			productType = "com.apple.product-type.application";
@@ -212,8 +228,6 @@
 				07DC28AE2F3488C300BC48C6 /* Daily AI AffirmationsTests */,
 			);
 			name = "Daily AI AffirmationsTests";
-			packageProductDependencies = (
-			);
 			productName = "Daily AI AffirmationsTests";
 			productReference = 07DC28AB2F3488C300BC48C6 /* Daily AI AffirmationsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -235,8 +249,6 @@
 				07DC28B82F3488C300BC48C6 /* Daily AI AffirmationsUITests */,
 			);
 			name = "Daily AI AffirmationsUITests";
-			packageProductDependencies = (
-			);
 			productName = "Daily AI AffirmationsUITests";
 			productReference = 07DC28B52F3488C300BC48C6 /* Daily AI AffirmationsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -258,8 +270,6 @@
 				D626ACF197B005ADCBEE4512 /* Shared */,
 			);
 			name = "Daily AI Affirmations WidgetExtension";
-			packageProductDependencies = (
-			);
 			productName = "Daily AI Affirmations WidgetExtension";
 			productReference = 07DC28CC2F348A3100BC48C6 /* Daily AI Affirmations WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -343,6 +353,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDEA950764A757231B99037A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Daily AI Affirmations-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1980E3C7F74EE8C62155140 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Daily AI Affirmations/Pods-Daily AI Affirmations-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Daily AI Affirmations/Pods-Daily AI Affirmations-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Daily AI Affirmations/Pods-Daily AI Affirmations-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		07DC289A2F3488C200BC48C6 /* Sources */ = {
@@ -432,7 +488,7 @@
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -496,7 +552,7 @@
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -517,6 +573,7 @@
 		};
 		07DC28C02F3488C300BC48C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF65419BC79A9329E4F40D15 /* Pods-Daily AI Affirmations.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -524,7 +581,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -549,6 +608,7 @@
 		};
 		07DC28C12F3488C300BC48C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD6A70EC59E90E944BBC9E11 /* Pods-Daily AI Affirmations.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -556,7 +616,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
