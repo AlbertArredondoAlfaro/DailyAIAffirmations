@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var model = AffirmationViewModel()
+
     var body: some View {
         ZStack {
             AppBackground()
@@ -17,8 +20,8 @@ struct ContentView: View {
 
                 AffirmationCard(
                     title: "Daily AI Affirmations",
-                    subtitle: "Tu afirmación de hoy",
-                    text: "Hoy elijo la calma, la claridad y el progreso constante."
+                    subtitle: model.subtitle,
+                    text: model.currentAffirmation
                 )
 
                 actionRow
@@ -29,6 +32,13 @@ struct ContentView: View {
             .padding(.top, 28)
             .padding(.bottom, 32)
         }
+        .task {
+            model.loadDaily()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            guard newPhase == .active else { return }
+            model.loadDaily()
+        }
     }
 
     private var header: some View {
@@ -37,7 +47,7 @@ struct ContentView: View {
                 .font(.system(size: 30, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
 
-            Text("Respira. Conecta. Avanza.")
+            Text(model.tagline)
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundStyle(.white.opacity(0.8))
         }
@@ -49,43 +59,49 @@ struct ContentView: View {
             if #available(iOS 26, *) {
                 GlassEffectContainer(spacing: 12) {
                     HStack(spacing: 12) {
-                        Button { }
-                        label: {
-                            Label("Random", systemImage: "shuffle")
+                        Button {
+                            model.randomize()
+                        } label: {
+                            Label(model.randomLabel, systemImage: "shuffle")
                                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 52)
                         }
+                        .accessibilityLabel(model.randomLabel)
                         .buttonStyle(.glassProminent)
 
                         Button { }
                         label: {
-                            Label("Customize", systemImage: "pencil")
+                            Label(model.customizeLabel, systemImage: "pencil")
                                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 52)
                         }
+                        .accessibilityLabel(model.customizeLabel)
                         .buttonStyle(.glass)
                     }
                 }
             } else {
                 HStack(spacing: 12) {
-                    Button { }
-                    label: {
-                        Label("Random", systemImage: "shuffle")
+                    Button {
+                        model.randomize()
+                    } label: {
+                        Label(model.randomLabel, systemImage: "shuffle")
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                     }
+                    .accessibilityLabel(model.randomLabel)
                     .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
 
                     Button { }
                     label: {
-                        Label("Customize", systemImage: "pencil")
+                        Label(model.customizeLabel, systemImage: "pencil")
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                     }
+                    .accessibilityLabel(model.customizeLabel)
                     .background(.thinMaterial, in: .rect(cornerRadius: 18))
                 }
             }
