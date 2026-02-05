@@ -40,9 +40,8 @@ struct Provider: TimelineProvider {
         let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language, allowPlaceholders: false)
         let entry = AffirmationEntry(date: now, affirmation: affirmation, language: language)
 
-        let calendar = Calendar.current
-        let startOfTomorrow = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: now) ?? now)
-        let timeline = Timeline(entries: [entry], policy: .after(startOfTomorrow))
+        let nextRefresh = WidgetTimelineHelper.nextRefreshDate(from: now)
+        let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
         completion(timeline)
     }
 }

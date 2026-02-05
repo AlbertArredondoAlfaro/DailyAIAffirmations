@@ -3,6 +3,14 @@ use_frameworks!
 
 target 'Daily AI Affirmations' do
   pod 'Google-Mobile-Ads-SDK'
+
+  target 'Daily AI AffirmationsTests' do
+    inherit! :search_paths
+  end
+
+  target 'Daily AI AffirmationsUITests' do
+    inherit! :search_paths
+  end
 end
 
 post_install do |installer|

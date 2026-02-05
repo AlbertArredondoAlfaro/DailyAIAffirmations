@@ -169,13 +169,12 @@ struct ContentView: View {
 
 
     private func renderShareImage() -> UIImage? {
-        let renderer = ImageRenderer(content: ShareCardView(
+        ShareImageRenderer.render(
             title: NSLocalizedString("app_title", comment: ""),
             subtitle: model.subtitle,
-            text: model.displayAffirmation
-        ))
-        renderer.scale = displayScale
-        return renderer.uiImage
+            text: model.displayAffirmation,
+            scale: displayScale
+        )
     }
 }
 
@@ -242,27 +241,12 @@ private struct CustomizationSheet: View {
     }
 }
 
-private struct ShareCardView: View {
-    let title: String
-    let subtitle: String
-    let text: String
-
-    var body: some View {
-        ZStack {
-            AppBackground()
-            AffirmationCard(title: title, subtitle: subtitle, text: text)
-                .padding(24)
-        }
-        .frame(width: 720, height: 720)
-    }
-}
-
 private struct ShareItem: Identifiable {
     let id = UUID()
     let image: UIImage
 }
 
-private struct AffirmationCard: View {
+struct AffirmationCard: View {
     let title: String
     let subtitle: String
     let text: String
@@ -294,7 +278,7 @@ private struct AffirmationCard: View {
     }
 }
 
-private struct AppBackground: View {
+struct AppBackground: View {
     var body: some View {
         ZStack {
             LinearGradient(
