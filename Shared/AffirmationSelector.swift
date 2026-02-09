@@ -1,6 +1,6 @@
 //
 //  AffirmationSelector.swift
-//  Daily AI Affirmations
+//  Daily Affirmations
 //
 //  Created by Codex.
 //
