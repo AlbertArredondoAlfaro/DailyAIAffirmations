@@ -1,14 +1,14 @@
 platform :ios, '26.0'
 use_frameworks!
 
-target 'Daily AI Affirmations' do
+target 'Daily Affirmations' do
   pod 'Google-Mobile-Ads-SDK'
 
-  target 'Daily AI AffirmationsTests' do
+  target 'Daily AffirmationsTests' do
     inherit! :search_paths
   end
 
-  target 'Daily AI AffirmationsUITests' do
+  target 'Daily AffirmationsUITests' do
     inherit! :search_paths
   end
 end

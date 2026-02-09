@@ -1,4 +1,4 @@
-# Daily AI Affirmations
+# Daily Affirmations
 
 Simple iOS app that delivers a daily positive affirmation, with widget support and shareable visuals.
 
