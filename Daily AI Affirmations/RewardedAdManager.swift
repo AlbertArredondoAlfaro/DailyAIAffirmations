@@ -20,6 +20,7 @@ final class RewardedAdManager: NSObject {
     private let policy = RewardedAdPolicy(openCountKey: "admob.rewarded.openCount")
 
     func appDidBecomeActive() {
+        guard !ProStatus.isPro else { return }
         let action = policy.handleOpen(now: Date(), lastCountedAt: &lastCountedAt, defaults: defaults)
         switch action {
         case .ignore:
@@ -32,6 +33,7 @@ final class RewardedAdManager: NSObject {
     }
 
     private func loadIfNeeded() {
+        guard !ProStatus.isPro else { return }
         guard rewardedAd == nil, !isLoading else { return }
         isLoading = true
 
@@ -52,6 +54,7 @@ final class RewardedAdManager: NSObject {
     }
 
     private func presentIfReady() {
+        guard !ProStatus.isPro else { return }
         guard let ad = rewardedAd else {
             loadIfNeeded()
             return
@@ -106,6 +109,9 @@ struct RewardedAdPolicy {
 extension RewardedAdManager: FullScreenContentDelegate {
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         loadIfNeeded()
+        if !ProStatus.isPro {
+            NotificationCenter.default.post(name: ProNotifications.rewardedAdDidClose, object: nil)
+        }
     }
 
     func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
