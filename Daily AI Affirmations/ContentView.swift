@@ -29,6 +29,8 @@ struct ContentView: View {
                     subtitle: model.subtitle,
                     text: model.displayAffirmation
                 )
+                .padding(.top, 36)
+                .padding(.bottom, 36)
 
                 actionRow
 
@@ -78,7 +80,7 @@ struct ContentView: View {
                     .foregroundStyle(.white)
 
                 Text(model.tagline)
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .font(.system(size: 22, weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
             }
 
@@ -113,12 +115,12 @@ struct ContentView: View {
                             model.randomize()
                         } label: {
                             Label(model.randomLabel, systemImage: "shuffle")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .font(.system(size: 18, weight: .semibold, design: .rounded))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 52)
                         }
                         .accessibilityLabel(model.randomLabel)
-                        .buttonStyle(.glassProminent)
+                        .buttonStyle(.glass)
 
                         Button {
                             draftName = model.customName
@@ -127,7 +129,7 @@ struct ContentView: View {
                         }
                         label: {
                             Label(model.customizeLabel, systemImage: "pencil")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .font(.system(size: 18, weight: .semibold, design: .rounded))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 52)
                         }
@@ -141,12 +143,16 @@ struct ContentView: View {
                         model.randomize()
                     } label: {
                         Label(model.randomLabel, systemImage: "shuffle")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                     }
                     .accessibilityLabel(model.randomLabel)
                     .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(Color.white.opacity(0.14), lineWidth: 1)
+                    )
 
                     Button {
                         draftName = model.customName
@@ -155,12 +161,16 @@ struct ContentView: View {
                     }
                     label: {
                         Label(model.customizeLabel, systemImage: "pencil")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
                     }
                     .accessibilityLabel(model.customizeLabel)
-                    .background(.thinMaterial, in: .rect(cornerRadius: 18))
+                    .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(Color.white.opacity(0.14), lineWidth: 1)
+                    )
                 }
             }
         }
@@ -192,39 +202,118 @@ private struct CustomizationSheet: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    TextField(nameLabel, text: $name)
-                        .textInputAutocapitalization(.words)
-                        .disableAutocorrection(true)
+            ZStack {
+                AppBackground()
 
-                    if isNameInvalid {
-                        Text(validationMessage)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                ScrollView {
+                    VStack(spacing: 20) {
+                        VStack(spacing: 8) {
+                            Text(title)
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.white)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+
+                            Text(validationMessage)
+                                .font(.system(.subheadline, design: .rounded))
+                                .fontWeight(.medium)
+                                .foregroundStyle(.white.opacity(0.7))
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                        }
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text(nameLabel)
+                                .font(.system(.headline, design: .rounded))
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.white.opacity(0.9))
+
+                            TextField(nameLabel, text: $name)
+                                .textInputAutocapitalization(.words)
+                                .disableAutocorrection(true)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 12)
+                                .background(.ultraThinMaterial, in: .rect(cornerRadius: 14))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                )
+                                .foregroundStyle(.white)
+                                .accessibilityHint(Text(validationMessage))
+
+                            if isNameInvalid {
+                                Text(validationMessage)
+                                    .font(.caption)
+                                    .foregroundStyle(.white.opacity(0.75))
+                            }
+                        }
+                        .padding(18)
+                        .glassCard(cornerRadius: 22)
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Toggle(isOn: $useName) {
+                                Text(useNameLabel)
+                                    .font(.system(.headline, design: .rounded))
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                            }
+                            .toggleStyle(.switch)
+                            .tint(.white.opacity(0.85))
+                        }
+                        .padding(18)
+                        .glassCard(cornerRadius: 22)
+
+                        HStack(spacing: 12) {
+                            Button {
+                                dismiss()
+                            } label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .fill(.ultraThinMaterial)
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                    Text(cancelLabel)
+                                        .font(.system(.headline, design: .rounded))
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(.white)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+
+                            Button {
+                                onSave()
+                                dismiss()
+                            } label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .fill(.ultraThinMaterial)
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                    Text(saveLabel)
+                                        .font(.system(.headline, design: .rounded))
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(.white)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(isSaveDisabled)
+                            .opacity(isSaveDisabled ? 0.6 : 1.0)
+                        }
+                        .padding(.top, 8)
                     }
-                }
-
-                Section {
-                    Toggle(useNameLabel, isOn: $useName)
+                    .padding(.horizontal, 22)
+                    .padding(.top, 24)
+                    .padding(.bottom, 24)
                 }
             }
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(cancelLabel) {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(saveLabel) {
-                        onSave()
-                        dismiss()
-                    }
-                    .disabled(isSaveDisabled)
-                }
-            }
+            .ignoresSafeArea(edges: [.bottom])
         }
     }
 
@@ -257,24 +346,40 @@ struct AffirmationCard: View {
     }
 
     private var cardContent: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text(title)
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white)
+        ZStack {
+            RoundedRectangle(cornerRadius: 26)
+                .fill(Color.black.opacity(0.28))
 
-                Text(subtitle)
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.7))
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .center, spacing: 8) {
+                    Text(subtitle)
+                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black.opacity(0.35), radius: 8, x: 0, y: 2)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding(.top, 18)
+
+                Spacer(minLength: 8)
+
+                Text(text)
+                    .font(.system(size: 26, weight: .medium, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.98))
+                    .lineSpacing(4)
+                    .multilineTextAlignment(.center)
+                    .shadow(color: .black.opacity(0.35), radius: 10, x: 0, y: 3)
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                Spacer(minLength: 0)
             }
-
-            Text(text)
-                .font(.system(size: 22, weight: .medium, design: .rounded))
-                .foregroundStyle(.white)
-                .lineSpacing(4)
+            .padding(22)
+            .frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
         }
-        .padding(22)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(
+            RoundedRectangle(cornerRadius: 26)
+                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+        )
     }
 }
 
