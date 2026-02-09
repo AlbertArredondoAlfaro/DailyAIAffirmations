@@ -70,19 +70,6 @@ struct CustomizationSheet: View {
                         .padding(18)
                         .glassCard(cornerRadius: 22)
 
-                        VStack(alignment: .leading, spacing: 12) {
-                            Toggle(isOn: $useName) {
-                                Text(useNameLabel)
-                                    .font(.system(.headline, design: .rounded))
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(.white)
-                            }
-                            .toggleStyle(.switch)
-                            .tint(.white.opacity(0.85))
-                        }
-                        .padding(18)
-                        .glassCard(cornerRadius: 22)
-
                         HStack(spacing: 12) {
                             Button {
                                 dismiss()
@@ -104,6 +91,7 @@ struct CustomizationSheet: View {
                             .buttonStyle(.plain)
 
                             Button {
+                                useName = !trimmedName.isEmpty
                                 onSave()
                                 dismiss()
                             } label: {
@@ -141,7 +129,7 @@ struct CustomizationSheet: View {
     }
 
     private var isNameInvalid: Bool {
-        useName && trimmedName.isEmpty
+        trimmedName.isEmpty
     }
 
     private var isSaveDisabled: Bool {
