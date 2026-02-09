@@ -232,3 +232,7 @@ private struct ShareItem: Identifiable {
     let id = UUID()
     let image: UIImage
 }
+
+#Preview {
+    ContentView()
+}
