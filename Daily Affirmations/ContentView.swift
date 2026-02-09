@@ -20,6 +20,9 @@ struct ContentView: View {
     @State private var draftUseName = false
     @State private var cardBackground = CardBackgroundGenerator.make()
     @StateObject private var proStore = ProStore()
+    private let maxContentWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 540 : .infinity
+    private let maxCardHeight: CGFloat = 500
+    private let isPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
 
     var body: some View {
         ZStack {
@@ -34,6 +37,8 @@ struct ContentView: View {
                     text: model.displayAffirmation,
                     background: cardBackground
                 )
+                .frame(maxWidth: maxContentWidth)
+                .frame(height: isPad ? maxCardHeight : nil)
                 .padding(.top, 36)
                 .padding(.bottom, 36)
 
@@ -44,6 +49,8 @@ struct ContentView: View {
             .padding(.horizontal, 22)
             .padding(.top, 28)
             .padding(.bottom, 32)
+            .frame(maxWidth: maxContentWidth)
+            .frame(maxWidth: .infinity)
         }
         .safeAreaInset(edge: .bottom) {
             if !proStore.isPro {
