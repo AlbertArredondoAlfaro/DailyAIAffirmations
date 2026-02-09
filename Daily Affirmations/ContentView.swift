@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var isProPromptPresented = false
     @State private var draftName = ""
     @State private var draftUseName = false
+    @State private var cardBackground = CardBackgroundGenerator.make()
     @StateObject private var proStore = ProStore()
 
     var body: some View {
@@ -30,7 +31,8 @@ struct ContentView: View {
                 AffirmationCard(
                     title: NSLocalizedString("app_title", comment: ""),
                     subtitle: model.subtitle,
-                    text: model.displayAffirmation
+                    text: model.displayAffirmation,
+                    background: cardBackground
                 )
                 .padding(.top, 36)
                 .padding(.bottom, 36)

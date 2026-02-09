@@ -102,7 +102,7 @@ struct RewardedAdPolicy {
         lastCountedAt = now
         let nextCount = defaults.integer(forKey: openCountKey) + 1
         defaults.set(nextCount, forKey: openCountKey)
-        return (nextCount % 5 == 0) ? .present : .load
+        return (nextCount % 3 == 0) ? .present : .load
     }
 }
 
