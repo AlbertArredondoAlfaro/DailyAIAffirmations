@@ -11,6 +11,7 @@ struct AffirmationCard: View {
     let title: String
     let subtitle: String
     let text: String
+    let background: CardBackgroundModel
 
     var body: some View {
         cardContent
@@ -19,6 +20,8 @@ struct AffirmationCard: View {
 
     private var cardContent: some View {
         ZStack {
+            AffirmationCardBackgroundView(model: background)
+
             RoundedRectangle(cornerRadius: 26)
                 .fill(Color.black.opacity(0.28))
 
