@@ -137,7 +137,7 @@ struct Daily_Affirmations_Widget: Widget {
             Daily_Affirmations_WidgetEntryView(entry: entry)
                 .widgetBackground()
         }
-        .configurationDisplayName("Daily Affirmations")
+        .configurationDisplayName("My Daily Affirmations")
         .description(NSLocalizedString("widget_description", comment: ""))
         .supportedFamilies([
             .systemSmall,
