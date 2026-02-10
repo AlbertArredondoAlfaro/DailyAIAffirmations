@@ -20,6 +20,7 @@ struct ContentView: View {
     @State private var draftUseName = false
     @State private var cardBackground = CardBackgroundGenerator.make()
     @StateObject private var proStore = ProStore()
+    private let notificationManager = NotificationManager.shared
     private let maxContentWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 540 : .infinity
     private let maxCardHeight: CGFloat = 500
     private let isPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
@@ -61,11 +62,15 @@ struct ContentView: View {
         }
         .task {
             model.loadDaily()
+            await notificationManager.bootstrap()
         }
         .onChange(of: scenePhase) { _, newPhase in
             guard newPhase == .active else { return }
             model.loadDaily()
             RewardedAdManager.shared.appDidBecomeActive()
+            Task {
+                await notificationManager.refreshIfNeeded()
+            }
         }
         .sheet(item: $shareItem) { item in
             ShareSheet(items: [item.image])
@@ -79,7 +84,8 @@ struct ContentView: View {
                 cancelLabel: model.cancelLabel,
                 validationMessage: model.nameValidationMessage,
                 name: $draftName,
-                useName: $draftUseName
+                useName: $draftUseName,
+                notificationManager: notificationManager
             ) {
                 model.saveCustomization(name: draftName, useName: draftUseName)
             }
