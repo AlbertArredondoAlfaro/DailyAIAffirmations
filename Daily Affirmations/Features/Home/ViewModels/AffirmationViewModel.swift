@@ -11,11 +11,6 @@ import Observation
 @MainActor
 @Observable
 final class AffirmationViewModel {
-    private enum DefaultsKey {
-        static let customName = "customName"
-        static let useCustomName = "useCustomName"
-    }
-
     private let calendar: Calendar
     private let locale: Locale
     private let defaults: UserDefaults
@@ -31,8 +26,8 @@ final class AffirmationViewModel {
         self.defaults = defaults
         let detectedLanguage = AffirmationSelector.language(for: locale)
         self.language = detectedLanguage
-        let savedName = defaults.string(forKey: DefaultsKey.customName) ?? ""
-        let savedUseName = defaults.bool(forKey: DefaultsKey.useCustomName)
+        let savedName = defaults.string(forKey: CustomizationDefaults.customNameKey) ?? ""
+        let savedUseName = defaults.bool(forKey: CustomizationDefaults.useNameKey)
         self.customName = savedName
         self.useCustomName = savedUseName
         self.currentAffirmation = AffirmationSelector.dailyAffirmation(
@@ -93,8 +88,8 @@ final class AffirmationViewModel {
     func saveCustomization(name: String, useName: Bool) {
         customName = name
         useCustomName = useName
-        defaults.set(name, forKey: DefaultsKey.customName)
-        defaults.set(useName, forKey: DefaultsKey.useCustomName)
+        defaults.set(name, forKey: CustomizationDefaults.customNameKey)
+        defaults.set(useName, forKey: CustomizationDefaults.useNameKey)
         loadDaily()
     }
 
@@ -117,8 +112,8 @@ final class AffirmationViewModel {
     }
 
     private func loadCustomization() {
-        customName = defaults.string(forKey: DefaultsKey.customName) ?? ""
-        useCustomName = defaults.bool(forKey: DefaultsKey.useCustomName)
+        customName = defaults.string(forKey: CustomizationDefaults.customNameKey) ?? ""
+        useCustomName = defaults.bool(forKey: CustomizationDefaults.useNameKey)
     }
 
     private func sanitizedAffirmation(_ value: String) -> String {

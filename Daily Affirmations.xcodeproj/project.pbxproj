@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070C3FF52F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */; };
-		070C3FF62F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */; };
+		070C3FF52F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */; };
+		070C3FF62F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */; };
 		07DC28CF2F348A3100BC48C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28CE2F348A3100BC48C6 /* WidgetKit.framework */; };
 		07DC28D12F348A3100BC48C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28D02F348A3100BC48C6 /* SwiftUI.framework */; };
 		07DC28E02F348A3200BC48C6 /* Daily Affirmations WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 07DC28CC2F348A3100BC48C6 /* Daily Affirmations WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -56,7 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Daily Affirmations/Resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Daily Affirmations/Resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		07DC289E2F3488C200BC48C6 /* Daily Affirmations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Affirmations.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC28AB2F3488C300BC48C6 /* Daily AffirmationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AffirmationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC28B52F3488C300BC48C6 /* Daily AffirmationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AffirmationsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,15 +78,14 @@
 		9A1C0F5E2F3A000000000001 /* Exceptions for "Daily Affirmations" folder in "Daily Affirmations" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"App/Info.plist",
-				"Resources/Info.plist",
+				App/Info.plist,
 			);
 			target = 07DC289D2F3488C200BC48C6 /* Daily Affirmations */;
 		};
 		9A1C0F5E2F3A000000000002 /* Exceptions for "Daily Affirmations Widget" folder in "Daily Affirmations WidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Resources/Info.plist",
+				Resources/Info.plist,
 			);
 			target = 07DC28CB2F348A3100BC48C6 /* Daily Affirmations WidgetExtension */;
 		};
@@ -166,7 +165,7 @@
 		07DC28952F3488C200BC48C6 = {
 			isa = PBXGroup;
 			children = (
-				070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */,
+				070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */,
 				07DC28A02F3488C200BC48C6 /* Daily Affirmations */,
 				D626ACF197B005ADCBEE4512 /* Shared */,
 				07DC28AE2F3488C300BC48C6 /* Daily AffirmationsTests */,
@@ -361,7 +360,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070C3FF52F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */,
+				070C3FF52F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070C3FF62F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */,
+				070C3FF62F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

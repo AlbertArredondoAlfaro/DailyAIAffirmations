@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct CustomizationSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -17,7 +18,11 @@ struct CustomizationSheet: View {
     let validationMessage: String
     @Binding var name: String
     @Binding var useName: Bool
+    let notificationManager: NotificationManager
     let onSave: () -> Void
+    @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
+    @State private var notificationsEnabled = false
+    @State private var isCheckingNotifications = false
 
     var body: some View {
         NavigationStack {
@@ -70,6 +75,8 @@ struct CustomizationSheet: View {
                         .padding(18)
                         .glassCard(cornerRadius: 22)
 
+                        notificationSection
+
                         HStack(spacing: 12) {
                             Button {
                                 dismiss()
@@ -93,6 +100,9 @@ struct CustomizationSheet: View {
                             Button {
                                 useName = !trimmedName.isEmpty
                                 onSave()
+                                Task {
+                                    await refreshNotificationsIfEnabled()
+                                }
                                 dismiss()
                             } label: {
                                 ZStack {
@@ -122,6 +132,9 @@ struct CustomizationSheet: View {
             }
             .ignoresSafeArea(edges: [.bottom])
         }
+        .task {
+            await refreshNotificationState()
+        }
     }
 
     private var trimmedName: String {
@@ -134,5 +147,122 @@ struct CustomizationSheet: View {
 
     private var isSaveDisabled: Bool {
         isNameInvalid
+    }
+
+    private var notificationSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(NSLocalizedString("notification_title", comment: ""))
+                .font(.system(.headline, design: .rounded))
+                .fontWeight(.semibold)
+                .foregroundStyle(.white.opacity(0.9))
+
+            if notificationStatus == .denied {
+                Text(NSLocalizedString("notification_denied", comment: ""))
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.7))
+
+                Button {
+                    notificationManager.openSystemSettings()
+                } label: {
+                    Text(NSLocalizedString("notification_settings", comment: ""))
+                        .font(.system(.headline, design: .rounded))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 52)
+                        .background(.ultraThinMaterial, in: .rect(cornerRadius: 18))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                        )
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            } else {
+                Toggle(isOn: Binding(
+                    get: { notificationsEnabled },
+                    set: { newValue in
+                        notificationsEnabled = newValue
+                        Task {
+                            await updateNotifications(enabled: newValue)
+                        }
+                    }
+                )) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(NSLocalizedString("notification_toggle", comment: ""))
+                            .font(.system(.subheadline, design: .rounded))
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                        Text(NSLocalizedString("notification_time", comment: ""))
+                            .font(.system(.caption, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.7))
+                    }
+                }
+                .toggleStyle(.switch)
+                .tint(.white.opacity(0.85))
+                .disabled(isCheckingNotifications)
+                .opacity(isCheckingNotifications ? 0.6 : 1.0)
+
+                Text(NSLocalizedString("notification_app_only", comment: ""))
+                    .font(.system(.caption, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.65))
+            }
+        }
+        .padding(18)
+        .glassCard(cornerRadius: 22)
+    }
+
+    private func refreshNotificationState() async {
+        isCheckingNotifications = true
+        let status = await notificationManager.authorizationStatus()
+        notificationStatus = status
+        if notificationManager.isAuthorized(status) {
+            notificationsEnabled = notificationManager.isEnabled
+        } else {
+            notificationsEnabled = false
+        }
+        isCheckingNotifications = false
+    }
+
+    private func updateNotifications(enabled: Bool) async {
+        isCheckingNotifications = true
+        let status = await notificationManager.authorizationStatus()
+        notificationStatus = status
+
+        if enabled {
+            if status == .notDetermined {
+                let granted = await notificationManager.requestAuthorization()
+                notificationStatus = await notificationManager.authorizationStatus()
+                if granted {
+                    notificationManager.setEnabled(true)
+                    await notificationManager.scheduleDailyAffirmations()
+                    notificationsEnabled = true
+                } else {
+                    notificationManager.setEnabled(false)
+                    notificationsEnabled = false
+                }
+            } else if notificationManager.isAuthorized(status) {
+                notificationManager.setEnabled(true)
+                await notificationManager.scheduleDailyAffirmations()
+                notificationsEnabled = true
+            } else {
+                notificationManager.setEnabled(false)
+                notificationsEnabled = false
+            }
+        } else {
+            notificationManager.setEnabled(false)
+            await notificationManager.cancelAll()
+            notificationsEnabled = false
+        }
+
+        isCheckingNotifications = false
+    }
+
+    private func refreshNotificationsIfEnabled() async {
+        let status = await notificationManager.authorizationStatus()
+        guard notificationManager.isAuthorized(status) else { return }
+        if notificationManager.isEnabled {
+            await notificationManager.scheduleDailyAffirmations()
+        }
     }
 }

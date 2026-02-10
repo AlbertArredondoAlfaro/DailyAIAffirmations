@@ -10,13 +10,31 @@ import SwiftUI
 @MainActor
 struct ShareImageRenderer {
     static func render(title: String, subtitle: String, text: String, scale: CGFloat) -> UIImage? {
-        let renderer = ImageRenderer(content: ShareStoryView(
+        let view = ShareStoryView(
             title: title,
             subtitle: subtitle,
             text: text
-        ))
-        renderer.scale = 1
-        return renderer.uiImage
+        )
+        let renderer = ImageRenderer(content: view)
+        renderer.proposedSize = .init(width: 1080, height: 1920)
+        renderer.scale = max(scale, 1)
+        if let image = renderer.uiImage {
+            return image
+        }
+
+        return fallbackRender(view: view)
+    }
+
+    private static func fallbackRender(view: ShareStoryView) -> UIImage? {
+        let size = CGSize(width: 1080, height: 1920)
+        let controller = UIHostingController(rootView: view)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
     }
 }
 
