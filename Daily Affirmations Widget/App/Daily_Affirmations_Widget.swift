@@ -21,34 +21,54 @@ private enum WidgetStrings {
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> AffirmationEntry {
         let language = AffirmationSelector.language(for: .current)
+        let (affirmation, detail) = widgetAffirmation(for: .now, language: language)
         return AffirmationEntry(
             date: .now,
-            affirmation: AffirmationSelector.catalog(for: language, allowPlaceholders: false).first ?? "",
-            detail: AffirmationExpansionGenerator.expand(
-                affirmation: AffirmationSelector.catalog(for: language, allowPlaceholders: false).first ?? "",
-                language: language
-            ),
+            affirmation: affirmation,
+            detail: detail,
             language: language
         )
     }
 
     func getSnapshot(in context: Context, completion: @escaping (AffirmationEntry) -> Void) {
         let language = AffirmationSelector.language(for: .current)
-        let affirmation = AffirmationSelector.dailyAffirmation(for: .now, language: language, allowPlaceholders: false)
-        let detail = AffirmationExpansionGenerator.expand(affirmation: affirmation, language: language)
+        let (affirmation, detail) = widgetAffirmation(for: .now, language: language)
         completion(AffirmationEntry(date: .now, affirmation: affirmation, detail: detail, language: language))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AffirmationEntry>) -> Void) {
         let language = AffirmationSelector.language(for: .current)
         let now = Date()
-        let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language, allowPlaceholders: false)
-        let detail = AffirmationExpansionGenerator.expand(affirmation: affirmation, language: language)
+        let (affirmation, detail) = widgetAffirmation(for: now, language: language)
         let entry = AffirmationEntry(date: now, affirmation: affirmation, detail: detail, language: language)
 
         let nextRefresh = WidgetTimelineHelper.nextRefreshDate(from: now)
         let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
         completion(timeline)
+    }
+
+    private func widgetAffirmation(for date: Date, language: AffirmationLanguage) -> (String, String) {
+        let defaults = CustomizationDefaults.sharedDefaults
+        let name = defaults.string(forKey: CustomizationDefaults.customNameKey) ?? ""
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let useName = defaults.bool(forKey: CustomizationDefaults.useNameKey)
+        let allowPlaceholders = useName && !trimmed.isEmpty
+
+        let raw = AffirmationSelector.dailyAffirmation(
+            for: date,
+            language: language,
+            allowPlaceholders: allowPlaceholders
+        )
+
+        let affirmation = allowPlaceholders
+            ? raw.replacingOccurrences(of: "{name}", with: trimmed)
+            : raw
+
+        let detail = AffirmationExpansionGenerator.expand(
+            affirmation: affirmation,
+            language: language
+        )
+        return (affirmation, detail)
     }
 }
 

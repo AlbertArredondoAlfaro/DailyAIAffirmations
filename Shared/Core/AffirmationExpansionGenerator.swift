@@ -13,7 +13,7 @@ enum AffirmationExpansionGenerator {
         guard !trimmed.isEmpty else { return fallback(for: language) }
 
         let keyword = extractKeyword(from: trimmed, language: language)
-        let template = template(for: language, keyword: keyword)
+        let template = template(for: language, keyword: keyword, seed: trimmed)
         return ensurePunctuation(template)
     }
 
@@ -31,23 +31,29 @@ enum AffirmationExpansionGenerator {
         return candidates.first { lowered.contains($0) }
     }
 
-    private static func template(for language: AffirmationLanguage, keyword: String?) -> String {
+    private static func template(for language: AffirmationLanguage, keyword: String?, seed: String) -> String {
         switch language {
         case .english:
             if let keyword {
-                return englishKeywordTemplates.randomElement()?
+                return selectTemplate(
+                    from: englishKeywordTemplates,
+                    seed: seed + "|" + keyword
+                )?
                     .replacingOccurrences(of: "{keyword}", with: keyword)
                     ?? "Let \(keyword) guide your next small step. You are allowed to move gently and still move forward."
             }
-            return englishTemplates.randomElement()
+            return selectTemplate(from: englishTemplates, seed: seed)
                 ?? "Give yourself a steady breath and a kind pace. Even small steps are meaningful progress."
         case .spanish:
             if let keyword {
-                return spanishKeywordTemplates.randomElement()?
+                return selectTemplate(
+                    from: spanishKeywordTemplates,
+                    seed: seed + "|" + keyword
+                )?
                     .replacingOccurrences(of: "{keyword}", with: keyword)
                     ?? "Deja que la \(keyword) guíe tu siguiente pequeño paso. Puedes avanzar con suavidad y seguir avanzando."
             }
-            return spanishTemplates.randomElement()
+            return selectTemplate(from: spanishTemplates, seed: seed)
                 ?? "Regálate una respiración tranquila y un ritmo amable. Incluso los pasos pequeños son progreso."
         }
     }
@@ -66,6 +72,22 @@ enum AffirmationExpansionGenerator {
         guard let last = trimmed.last else { return trimmed }
         if ".!?".contains(last) { return trimmed }
         return trimmed + "."
+    }
+
+    private static func selectTemplate(from templates: [String], seed: String) -> String? {
+        guard !templates.isEmpty else { return nil }
+        let index = stableHash(seed) % templates.count
+        return templates[index]
+    }
+
+    private static func stableHash(_ value: String) -> Int {
+        var hash: UInt64 = 1469598103934665603
+        let prime: UInt64 = 1099511628211
+        for byte in value.utf8 {
+            hash ^= UInt64(byte)
+            hash &*= prime
+        }
+        return Int(hash & 0x7FFF_FFFF)
     }
 
     private static let englishTemplates: [String] = [

@@ -7,6 +7,7 @@
 
 import Foundation
 import Observation
+import WidgetKit
 
 @MainActor
 @Observable
@@ -22,7 +23,7 @@ final class AffirmationViewModel {
     var customName: String = ""
     var useCustomName: Bool = false
 
-    init(calendar: Calendar = .current, locale: Locale = .current, defaults: UserDefaults = .standard) {
+    init(calendar: Calendar = .current, locale: Locale = .current, defaults: UserDefaults = CustomizationDefaults.sharedDefaults) {
         self.calendar = calendar
         self.locale = locale
         self.defaults = defaults
@@ -107,6 +108,7 @@ final class AffirmationViewModel {
         useCustomName = useName
         defaults.set(name, forKey: CustomizationDefaults.customNameKey)
         defaults.set(useName, forKey: CustomizationDefaults.useNameKey)
+        WidgetCenter.shared.reloadAllTimelines()
         loadDaily()
     }
 
