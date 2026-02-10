@@ -32,6 +32,8 @@
 "pro_title" = "PRO";
 "pro_subtitle" = "Remove ads and enjoy a clean, focused experience.";
 "pro_buy_mock" = "Go PRO";
+"pro_buy_with_price" = "Go PRO · %@";
+"pro_buy_loading" = "Loading price...";
 "pro_restore_mock" = "Restore purchase";
 "pro_close" = "Close";
 
