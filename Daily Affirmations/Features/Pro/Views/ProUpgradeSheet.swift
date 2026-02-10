@@ -41,7 +41,7 @@ struct ProUpgradeSheet: View {
                             }
                         } label: {
                             ZStack {
-                                Text(NSLocalizedString("pro_buy_mock", comment: ""))
+                                Text(buyButtonTitle)
                                     .font(.system(.headline, design: .rounded))
                                     .fontWeight(.semibold)
                                     .opacity(proStore.isProcessingPurchase ? 0 : 1)
@@ -58,7 +58,7 @@ struct ProUpgradeSheet: View {
                         .buttonStyle(.plain)
                         .background(.white.opacity(0.95), in: .rect(cornerRadius: 18))
                         .foregroundStyle(.black)
-                        .disabled(proStore.isProcessingPurchase)
+                        .disabled(proStore.isProcessingPurchase || proStore.productDisplayPrice == nil)
 
                         Button {
                             Task {
@@ -112,9 +112,20 @@ struct ProUpgradeSheet: View {
             } message: {
                 Text(proStore.lastErrorMessage ?? NSLocalizedString("pro_error_generic", comment: ""))
             }
+            .task {
+                await proStore.loadProduct()
+            }
             .onChange(of: proStore.lastErrorMessage) { _, newValue in
                 isErrorPresented = (newValue != nil)
             }
         }
+    }
+
+    private var buyButtonTitle: String {
+        guard let price = proStore.productDisplayPrice else {
+            return NSLocalizedString("pro_buy_loading", comment: "")
+        }
+        let format = NSLocalizedString("pro_buy_with_price", comment: "")
+        return String(format: format, price)
     }
 }

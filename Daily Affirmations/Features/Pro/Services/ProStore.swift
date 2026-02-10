@@ -22,6 +22,7 @@ enum ProPurchaseResult {
 
 struct ProProduct {
     let id: String
+    let displayPrice: String?
     let purchase: () async throws -> ProPurchaseResult
 }
 
@@ -33,6 +34,8 @@ final class ProStore: ObservableObject {
     typealias SyncHandler = () async throws -> Void
 
     @Published private(set) var isPro: Bool
+    @Published private(set) var productDisplayPrice: String?
+    @Published private(set) var isLoadingProduct = false
     @Published var lastErrorMessage: String?
     @Published var isProcessingPurchase = false
 
@@ -53,10 +56,15 @@ final class ProStore: ObservableObject {
         self.updatesProvider = updatesProvider
         self.syncHandler = syncHandler
         self.isPro = ProStatus.isPro
+        self.productDisplayPrice = nil
 
         updatesTask = Task { [weak self] in
             await self?.refreshEntitlements()
             await self?.listenForTransactions()
+        }
+
+        Task { [weak self] in
+            await self?.loadProduct()
         }
     }
 
@@ -65,7 +73,7 @@ final class ProStore: ObservableObject {
             productProvider: {
                 let products = try await Product.products(for: [ProStatus.productId])
                 return products.map { product in
-                    ProProduct(id: product.id) {
+                    ProProduct(id: product.id, displayPrice: product.displayPrice) {
                         let result = try await product.purchase()
                         switch result {
                         case .success(let verification):
@@ -116,6 +124,19 @@ final class ProStore: ObservableObject {
 
     deinit {
         updatesTask?.cancel()
+    }
+
+    func loadProduct() async {
+        guard !isLoadingProduct else { return }
+        isLoadingProduct = true
+        defer { isLoadingProduct = false }
+
+        do {
+            let products = try await productProvider()
+            productDisplayPrice = products.first?.displayPrice
+        } catch {
+            productDisplayPrice = nil
+        }
     }
 
     func purchase() async {
