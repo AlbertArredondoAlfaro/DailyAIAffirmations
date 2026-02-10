@@ -24,6 +24,10 @@ struct Provider: TimelineProvider {
         return AffirmationEntry(
             date: .now,
             affirmation: AffirmationSelector.catalog(for: language, allowPlaceholders: false).first ?? "",
+            detail: AffirmationExpansionGenerator.expand(
+                affirmation: AffirmationSelector.catalog(for: language, allowPlaceholders: false).first ?? "",
+                language: language
+            ),
             language: language
         )
     }
@@ -31,14 +35,16 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (AffirmationEntry) -> Void) {
         let language = AffirmationSelector.language(for: .current)
         let affirmation = AffirmationSelector.dailyAffirmation(for: .now, language: language, allowPlaceholders: false)
-        completion(AffirmationEntry(date: .now, affirmation: affirmation, language: language))
+        let detail = AffirmationExpansionGenerator.expand(affirmation: affirmation, language: language)
+        completion(AffirmationEntry(date: .now, affirmation: affirmation, detail: detail, language: language))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AffirmationEntry>) -> Void) {
         let language = AffirmationSelector.language(for: .current)
         let now = Date()
         let affirmation = AffirmationSelector.dailyAffirmation(for: now, language: language, allowPlaceholders: false)
-        let entry = AffirmationEntry(date: now, affirmation: affirmation, language: language)
+        let detail = AffirmationExpansionGenerator.expand(affirmation: affirmation, language: language)
+        let entry = AffirmationEntry(date: now, affirmation: affirmation, detail: detail, language: language)
 
         let nextRefresh = WidgetTimelineHelper.nextRefreshDate(from: now)
         let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
@@ -49,6 +55,7 @@ struct Provider: TimelineProvider {
 struct AffirmationEntry: TimelineEntry {
     let date: Date
     let affirmation: String
+    let detail: String
     let language: AffirmationLanguage
 }
 
@@ -62,66 +69,24 @@ struct Daily_Affirmations_WidgetEntryView: View {
 
     @ViewBuilder
     private var content: some View {
-        switch family {
-        case .systemSmall:
-            smallBody
-        case .systemMedium:
-            mediumBody
-        case .accessoryRectangular:
-            rectangularBody
-        case .accessoryCircular:
-            circularBody
-        case .accessoryInline:
-            inlineBody
-        default:
-            smallBody
-        }
-    }
-
-    private var smallBody: some View {
         card
-    }
-
-    private var mediumBody: some View {
-        card
-    }
-
-    private var rectangularBody: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(WidgetStrings.shortTitle(for: entry.language))
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-
-            Text(entry.affirmation)
-                .font(.caption)
-                .lineLimit(2)
-        }
-    }
-
-    private var circularBody: some View {
-        ZStack {
-            Circle().fill(.clear)
-            Text("DA")
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-        }
-    }
-
-    private var inlineBody: some View {
-        Text(entry.affirmation)
-            .font(.caption2)
-            .lineLimit(1)
     }
 
     private var card: some View {
-        return VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: 10) {
             Text(WidgetStrings.title(for: entry.language))
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.7))
 
             Text(entry.affirmation)
-                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
-                .lineLimit(4)
+                .lineLimit(5)
+
+            Text(entry.detail)
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundStyle(.white.opacity(0.75))
+                .lineLimit(6)
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -140,11 +105,8 @@ struct Daily_Affirmations_Widget: Widget {
         .configurationDisplayName("My Daily Affirmations")
         .description(NSLocalizedString("widget_description", comment: ""))
         .supportedFamilies([
-            .systemSmall,
             .systemMedium,
-            .accessoryInline,
-            .accessoryCircular,
-            .accessoryRectangular
+            .systemLarge
         ])
     }
 }
@@ -181,9 +143,19 @@ private extension View {
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemLarge) {
     Daily_Affirmations_Widget()
 } timeline: {
-    AffirmationEntry(date: .now, affirmation: "Hoy elijo la calma y la claridad.", language: .spanish)
-    AffirmationEntry(date: .now, affirmation: "Today I choose calm and clarity.", language: .english)
+    AffirmationEntry(
+        date: .now,
+        affirmation: "Hoy elijo la calma y la claridad.",
+        detail: "Regálate una respiración tranquila y un ritmo amable. Incluso los pasos pequeños son progreso.",
+        language: .spanish
+    )
+    AffirmationEntry(
+        date: .now,
+        affirmation: "Today I choose calm and clarity.",
+        detail: "Give yourself a steady breath and a kind pace. Even small steps are meaningful progress.",
+        language: .english
+    )
 }
