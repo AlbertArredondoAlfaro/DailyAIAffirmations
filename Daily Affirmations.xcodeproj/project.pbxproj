@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070C3FF52F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */; };
-		070C3FF62F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */; };
+		070C3FF52F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */; };
+		070C3FF62F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */; };
 		07DC28CF2F348A3100BC48C6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28CE2F348A3100BC48C6 /* WidgetKit.framework */; };
 		07DC28D12F348A3100BC48C6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DC28D02F348A3100BC48C6 /* SwiftUI.framework */; };
 		07DC28E02F348A3200BC48C6 /* Daily Affirmations WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 07DC28CC2F348A3100BC48C6 /* Daily Affirmations WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -56,7 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Daily Affirmations/Resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		07DC289E2F3488C200BC48C6 /* Daily Affirmations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Affirmations.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC28AB2F3488C300BC48C6 /* Daily AffirmationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AffirmationsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC28B52F3488C300BC48C6 /* Daily AffirmationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily AffirmationsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,10 +75,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		07DC28E12F348A3200BC48C6 /* Exceptions for "Daily Affirmations Widget" folder in "Daily Affirmations WidgetExtension" target */ = {
+		9A1C0F5E2F3A000000000001 /* Exceptions for "Daily Affirmations" folder in "Daily Affirmations" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				App/Info.plist,
+			);
+			target = 07DC289D2F3488C200BC48C6 /* Daily Affirmations */;
+		};
+		9A1C0F5E2F3A000000000002 /* Exceptions for "Daily Affirmations Widget" folder in "Daily Affirmations WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
 			);
 			target = 07DC28CB2F348A3100BC48C6 /* Daily Affirmations WidgetExtension */;
 		};
@@ -88,36 +95,31 @@
 		07DC28A02F3488C200BC48C6 /* Daily Affirmations */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				9A1C0F5E2F3A000000000001 /* Exceptions for "Daily Affirmations" folder in "Daily Affirmations" target */,
 			);
 			path = "Daily Affirmations";
 			sourceTree = "<group>";
 		};
 		07DC28AE2F3488C300BC48C6 /* Daily AffirmationsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = "Daily AffirmationsTests";
 			sourceTree = "<group>";
 		};
 		07DC28B82F3488C300BC48C6 /* Daily AffirmationsUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = "Daily AffirmationsUITests";
 			sourceTree = "<group>";
 		};
 		07DC28D22F348A3100BC48C6 /* Daily Affirmations Widget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				07DC28E12F348A3200BC48C6 /* Exceptions for "Daily Affirmations Widget" folder in "Daily Affirmations WidgetExtension" target */,
+				9A1C0F5E2F3A000000000002 /* Exceptions for "Daily Affirmations Widget" folder in "Daily Affirmations WidgetExtension" target */,
 			);
 			path = "Daily Affirmations Widget";
 			sourceTree = "<group>";
 		};
 		D626ACF197B005ADCBEE4512 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
@@ -163,7 +165,7 @@
 		07DC28952F3488C200BC48C6 = {
 			isa = PBXGroup;
 			children = (
-				070C3FF42F39F3BA00C57B71 /* LaunchScreen.storyboard */,
+				070C3FF42F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard */,
 				07DC28A02F3488C200BC48C6 /* Daily Affirmations */,
 				D626ACF197B005ADCBEE4512 /* Shared */,
 				07DC28AE2F3488C300BC48C6 /* Daily AffirmationsTests */,
@@ -358,7 +360,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070C3FF52F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */,
+				070C3FF52F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070C3FF62F39F3BA00C57B71 /* LaunchScreen.storyboard in Resources */,
+				070C3FF62F39F3BA00C57B71 /* Daily Affirmations/Resources/LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,9 +463,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Daily Affirmations/Pods-Daily Affirmations-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Daily Affirmations/Pods-Daily Affirmations-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -654,8 +660,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
+				INFOPLIST_FILE = "Daily Affirmations/App/Info.plist";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-9657159516824286~2788707912";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
@@ -667,7 +673,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -690,8 +696,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
+				INFOPLIST_FILE = "Daily Affirmations/App/Info.plist";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-9657159516824286~2788707912";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
@@ -703,7 +709,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmations";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -727,7 +733,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmationsTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmationsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -751,7 +757,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmationsTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmationsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -773,7 +779,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmationsUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmationsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -795,7 +801,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmationsUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmationsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -816,7 +822,7 @@
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Daily Affirmations Widget/Info.plist";
+				INFOPLIST_FILE = "Daily Affirmations Widget/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Daily Affirmations Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -825,7 +831,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmations.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmations.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -846,7 +852,7 @@
 				DEVELOPMENT_TEAM = 4JALZNH8YW;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Daily Affirmations Widget/Info.plist";
+				INFOPLIST_FILE = "Daily Affirmations Widget/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Daily Affirmations Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -855,7 +861,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.idreamstudios.dailyaffirmations.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = com.idreamstudios.dailyaffirmations.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
