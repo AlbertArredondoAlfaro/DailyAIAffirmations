@@ -28,9 +28,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             AppBackground()
+                .allowsHitTesting(false)
 
             VStack(spacing: 28) {
                 header
+                    .zIndex(2)
 
                 AffirmationCard(
                     title: NSLocalizedString("app_title", comment: ""),
@@ -85,6 +87,7 @@ struct ContentView: View {
                 validationMessage: model.nameValidationMessage,
                 name: $draftName,
                 useName: $draftUseName,
+                isPresented: $isCustomizePresented,
                 notificationManager: notificationManager
             ) {
                 model.saveCustomization(name: draftName, useName: draftUseName)
@@ -134,7 +137,9 @@ struct ContentView: View {
 
     private var shareButton: some View {
         Button {
-            guard let image = renderShareImage() else { return }
+            guard let image = renderShareImage() else {
+                return
+            }
             shareItem = ShareItem(image: image)
         } label: {
             Image(systemName: "square.and.arrow.up")

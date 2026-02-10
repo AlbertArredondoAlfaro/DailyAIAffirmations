@@ -9,6 +9,7 @@
 "customize_use_name" = "Use name in affirmation";
 "customize_save" = "Save";
 "customize_cancel" = "Cancel";
+"customize_close" = "Close";
 "customize_name_required" = "Enter a name to continue.";
 "notification_title" = "Daily notifications";
 "notification_toggle" = "Daily affirmation reminder";
@@ -16,6 +17,7 @@
 "notification_denied" = "Notifications are disabled. Enable them in Settings.";
 "notification_settings" = "Open Settings";
 "notification_app_only" = "This toggle only controls reminders inside the app. System notification permissions are managed in Settings.";
+"notification_section_title" = "Daily notifications";
 "widget_title" = "Daily affirmation";
 "widget_short_title" = "Today";
 "widget_description" = "A positive affirmation each day.";

@@ -18,6 +18,7 @@ struct CustomizationSheet: View {
     let validationMessage: String
     @Binding var name: String
     @Binding var useName: Bool
+    @Binding var isPresented: Bool
     let notificationManager: NotificationManager
     let onSave: () -> Void
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
@@ -31,6 +32,21 @@ struct CustomizationSheet: View {
 
                 ScrollView {
                     VStack(spacing: 20) {
+                        HStack {
+                            Spacer()
+                            Button {
+                                closeSheet()
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .frame(width: 40, height: 40)
+                            }
+                            .buttonStyle(.plain)
+                            .foregroundStyle(.white)
+                            .glassCircle()
+                            .accessibilityLabel(Text(NSLocalizedString("customize_close", comment: "")))
+                        }
+
                         VStack(spacing: 8) {
                             Text(title)
                                 .font(.system(.title2, design: .rounded))
@@ -38,64 +54,54 @@ struct CustomizationSheet: View {
                                 .foregroundStyle(.white)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
-
-                            Text(validationMessage)
-                                .font(.system(.subheadline, design: .rounded))
-                                .fontWeight(.medium)
-                                .foregroundStyle(.white.opacity(0.7))
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
                         }
 
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text(nameLabel)
-                                .font(.system(.headline, design: .rounded))
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.white.opacity(0.9))
+                        VStack(alignment: .leading, spacing: 16) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text(nameLabel)
+                                    .font(.system(.title3, design: .rounded))
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white.opacity(0.9))
 
-                            TextField(nameLabel, text: $name)
-                                .textInputAutocapitalization(.words)
-                                .disableAutocorrection(true)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 12)
-                                .background(.ultraThinMaterial, in: .rect(cornerRadius: 14))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
-                                )
-                                .foregroundStyle(.white)
-                                .accessibilityHint(Text(validationMessage))
+                                TextField(nameLabel, text: $name)
+                                    .textInputAutocapitalization(.words)
+                                    .disableAutocorrection(true)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 12)
+                                    .background(.ultraThinMaterial, in: .rect(cornerRadius: 14))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 14)
+                                            .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                    )
+                                    .foregroundStyle(.white)
+                                    .accessibilityHint(Text(validationMessage))
 
-                            if isNameInvalid {
-                                Text(validationMessage)
-                                    .font(.caption)
-                                    .foregroundStyle(.white.opacity(0.75))
-                            }
-                        }
-                        .padding(18)
-                        .glassCard(cornerRadius: 22)
-
-                        notificationSection
-
-                        HStack(spacing: 12) {
-                            Button {
-                                dismiss()
-                            } label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .fill(.ultraThinMaterial)
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
-                                    Text(cancelLabel)
-                                        .font(.system(.headline, design: .rounded))
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.white)
+                                if isNameInvalid {
+                                    Text(validationMessage)
+                                        .font(.caption)
+                                        .foregroundStyle(.white.opacity(0.75))
                                 }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 52)
-                                .contentShape(Rectangle())
                             }
-                            .buttonStyle(.plain)
+
+                            HStack(spacing: 12) {
+                                Button {
+                                    closeSheet()
+                                } label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .fill(.ultraThinMaterial)
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                        Text(cancelLabel)
+                                            .font(.system(.headline, design: .rounded))
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(.white)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 52)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
 
                             Button {
                                 useName = !trimmedName.isEmpty
@@ -103,27 +109,42 @@ struct CustomizationSheet: View {
                                 Task {
                                     await refreshNotificationsIfEnabled()
                                 }
-                                dismiss()
+                                closeSheet()
                             } label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .fill(.ultraThinMaterial)
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .stroke(Color.white.opacity(0.16), lineWidth: 1)
-                                    Text(saveLabel)
-                                        .font(.system(.headline, design: .rounded))
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.white)
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .fill(.ultraThinMaterial)
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                                        Text(saveLabel)
+                                            .font(.system(.headline, design: .rounded))
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(.white)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 52)
+                                    .contentShape(Rectangle())
                                 }
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 52)
-                                .contentShape(Rectangle())
+                                .buttonStyle(.plain)
+                                .disabled(isSaveDisabled)
+                                .opacity(isSaveDisabled ? 0.6 : 1.0)
                             }
-                            .buttonStyle(.plain)
-                            .disabled(isSaveDisabled)
-                            .opacity(isSaveDisabled ? 0.6 : 1.0)
                         }
-                        .padding(.top, 8)
+                        .padding(18)
+                        .background(Color.black.opacity(0.28), in: .rect(cornerRadius: 22))
+                        .glassCard(cornerRadius: 22)
+
+                        Text(NSLocalizedString("notification_section_title", comment: ""))
+                            .font(.system(.title3, design: .rounded))
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+
+                        notificationSection
+                            .padding(18)
+                            .background(Color.black.opacity(0.28), in: .rect(cornerRadius: 22))
+                            .glassCard(cornerRadius: 22)
                     }
                     .padding(.horizontal, 22)
                     .padding(.top, 24)
@@ -151,11 +172,6 @@ struct CustomizationSheet: View {
 
     private var notificationSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(NSLocalizedString("notification_title", comment: ""))
-                .font(.system(.headline, design: .rounded))
-                .fontWeight(.semibold)
-                .foregroundStyle(.white.opacity(0.9))
-
             if notificationStatus == .denied {
                 Text(NSLocalizedString("notification_denied", comment: ""))
                     .font(.system(.subheadline, design: .rounded))
@@ -190,7 +206,7 @@ struct CustomizationSheet: View {
                 )) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(NSLocalizedString("notification_toggle", comment: ""))
-                            .font(.system(.subheadline, design: .rounded))
+                            .font(.system(.title3, design: .rounded))
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
                         Text(NSLocalizedString("notification_time", comment: ""))
@@ -208,8 +224,6 @@ struct CustomizationSheet: View {
                     .foregroundStyle(.white.opacity(0.65))
             }
         }
-        .padding(18)
-        .glassCard(cornerRadius: 22)
     }
 
     private func refreshNotificationState() async {
@@ -264,5 +278,9 @@ struct CustomizationSheet: View {
         if notificationManager.isEnabled {
             await notificationManager.scheduleDailyAffirmations()
         }
+    }
+
+    private func closeSheet() {
+        isPresented = false
     }
 }

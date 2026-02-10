@@ -9,6 +9,7 @@
 "customize_use_name" = "Usar nombre en la frase";
 "customize_save" = "Guardar";
 "customize_cancel" = "Cancelar";
+"customize_close" = "Cerrar";
 "customize_name_required" = "Escribe un nombre para continuar.";
 "notification_title" = "Notificaciones diarias";
 "notification_toggle" = "Recordatorio diario";
@@ -16,6 +17,7 @@
 "notification_denied" = "Las notificaciones están desactivadas. Actívalas en Ajustes.";
 "notification_settings" = "Abrir Ajustes";
 "notification_app_only" = "Este interruptor solo controla los recordatorios de la app. Los permisos del sistema se gestionan en Ajustes.";
+"notification_section_title" = "Notificaciones diarias";
 "widget_title" = "Afirmación diaria";
 "widget_short_title" = "Hoy";
 "widget_description" = "Una afirmación positiva cada día.";
