@@ -20,9 +20,11 @@ struct ContentView: View {
     @State private var draftUseName = false
     @State private var cardBackground = CardBackgroundGenerator.make()
     @StateObject private var proStore = ProStore()
+    @StateObject private var audioManager = AudioManager.shared
     private let notificationManager = NotificationManager.shared
     private let maxContentWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 540 : .infinity
     private let maxCardHeight: CGFloat = 500
+    private let minCardHeight: CGFloat = 340
     private let isPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
 
     var body: some View {
@@ -43,6 +45,7 @@ struct ContentView: View {
                     background: cardBackground
                 )
                 .frame(maxWidth: maxContentWidth)
+                .frame(minHeight: isPad ? nil : minCardHeight)
                 .frame(height: isPad ? maxCardHeight : nil)
                 .padding(.top, 36)
                 .padding(.bottom, 36)
@@ -67,13 +70,18 @@ struct ContentView: View {
         .task {
             model.loadDaily()
             await notificationManager.bootstrap()
+            audioManager.startIfNeeded()
         }
         .onChange(of: scenePhase) { _, newPhase in
-            guard newPhase == .active else { return }
-            model.loadDaily()
-            RewardedAdManager.shared.appDidBecomeActive()
-            Task {
-                await notificationManager.refreshIfNeeded()
+            if newPhase == .active {
+                model.loadDaily()
+                RewardedAdManager.shared.appDidBecomeActive()
+                audioManager.startIfNeeded()
+                Task {
+                    await notificationManager.refreshIfNeeded()
+                }
+            } else {
+                audioManager.stop()
             }
         }
         .sheet(item: $shareItem) { item in
@@ -116,7 +124,17 @@ struct ContentView: View {
     }
 
     private var header: some View {
-        HStack(alignment: .top) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Spacer(minLength: 12)
+
+                HStack(spacing: 10) {
+                    audioToggleButton
+                    shareButton
+                    settingsButton
+                }
+            }
+
             VStack(alignment: .leading, spacing: 8) {
                 Text(NSLocalizedString("app_title", comment: ""))
                     .font(.system(size: 24, weight: .semibold, design: .rounded))
@@ -126,15 +144,24 @@ struct ContentView: View {
                     .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
             }
-
-            Spacer(minLength: 12)
-
-            HStack(spacing: 10) {
-                shareButton
-                settingsButton
-            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var audioToggleButton: some View {
+        Button {
+            audioManager.toggleMute()
+        } label: {
+            Image(systemName: audioManager.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                .font(.system(size: 18, weight: .semibold))
+                .frame(width: 44, height: 44)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.white)
+        .glassCircle()
+        .accessibilityLabel(
+            NSLocalizedString(audioManager.isMuted ? "audio_toggle_on" : "audio_toggle_off", comment: "")
+        )
     }
 
     private var shareButton: some View {
