@@ -27,7 +27,7 @@ final class NotificationManager {
         center: UNUserNotificationCenter = .current(),
         calendar: Calendar = .current,
         locale: Locale = .current,
-        defaults: UserDefaults = .standard
+        defaults: UserDefaults = CustomizationDefaults.sharedDefaults
     ) {
         self.center = center
         self.calendar = calendar
