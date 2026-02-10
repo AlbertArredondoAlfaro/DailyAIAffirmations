@@ -18,8 +18,10 @@ final class RewardedAdManager: NSObject {
     private var lastCountedAt: Date?
     private let defaults = UserDefaults.standard
     private let policy = RewardedAdPolicy(openCountKey: "admob.rewarded.openCount")
+    private let trackingManager = TrackingAuthorizationManager.shared
 
     func appDidBecomeActive() {
+        guard trackingManager.canRequestAds else { return }
         guard !ProStatus.isPro else { return }
         let action = policy.handleOpen(now: Date(), lastCountedAt: &lastCountedAt, defaults: defaults)
         switch action {
@@ -33,11 +35,15 @@ final class RewardedAdManager: NSObject {
     }
 
     private func loadIfNeeded() {
+        guard trackingManager.canRequestAds else { return }
         guard !ProStatus.isPro else { return }
         guard rewardedAd == nil, !isLoading else { return }
         isLoading = true
 
-        RewardedAd.load(with: AdMobConstants.rewardedAdUnitID, request: Request()) { [weak self] ad, _ in
+        RewardedAd.load(
+            with: AdMobConstants.rewardedAdUnitID,
+            request: AdRequestFactory.make(isPersonalizedAllowed: trackingManager.isPersonalizedAdsAllowed)
+        ) { [weak self] ad, _ in
             Task { [weak self] in
                 guard let self else { return }
                 await MainActor.run {
