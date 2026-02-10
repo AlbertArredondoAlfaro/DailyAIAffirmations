@@ -39,6 +39,7 @@ struct ContentView: View {
                     subtitle: model.subtitle,
                     text: model.displayAffirmation,
                     detailText: model.expandedAffirmation,
+                    illustrationName: model.illustrationName,
                     background: cardBackground
                 )
                 .frame(maxWidth: maxContentWidth)

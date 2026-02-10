@@ -12,6 +12,7 @@ struct AffirmationCard: View {
     let subtitle: String
     let text: String
     let detailText: String
+    let illustrationName: String
     let background: CardBackgroundModel
 
     var body: some View {
@@ -26,18 +27,19 @@ struct AffirmationCard: View {
             RoundedRectangle(cornerRadius: 26)
                 .fill(Color.black.opacity(0.28))
 
-            VStack(alignment: .leading, spacing: 8) {
-                VStack(alignment: .center, spacing: 8) {
-                    Text(subtitle)
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.35), radius: 8, x: 0, y: 2)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
-                }
-                .padding(.top, 28)
+            VStack(alignment: .leading, spacing: 2) {
+                Image(illustrationName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 128)
+                    .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 6)
+                    .padding(.top, 12)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHidden(true)
 
-                VStack(spacing: 12) {
+                Spacer(minLength: 2)
+
+                VStack(spacing: 6) {
                     Text(text)
                         .font(.system(size: 26, weight: .medium, design: .rounded))
                         .foregroundStyle(.white.opacity(0.98))
@@ -52,9 +54,12 @@ struct AffirmationCard: View {
                         .lineSpacing(3)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+
+                Spacer(minLength: 0)
             }
             .padding(22)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(.top, -30)
         }
         .overlay(
             RoundedRectangle(cornerRadius: 26)
