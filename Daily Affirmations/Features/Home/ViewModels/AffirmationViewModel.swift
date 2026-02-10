@@ -85,6 +85,13 @@ final class AffirmationViewModel {
         return currentAffirmation.replacingOccurrences(of: "{name}", with: trimmed)
     }
 
+    var expandedAffirmation: String {
+        AffirmationExpansionGenerator.expand(
+            affirmation: displayAffirmation,
+            language: language
+        )
+    }
+
     func saveCustomization(name: String, useName: Bool) {
         customName = name
         useCustomName = useName
