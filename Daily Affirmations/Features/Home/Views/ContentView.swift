@@ -272,6 +272,8 @@ struct ContentView: View {
             title: NSLocalizedString("app_title", comment: ""),
             subtitle: model.subtitle,
             text: model.displayAffirmation,
+            detailText: model.expandedAffirmation,
+            illustrationName: model.illustrationName,
             scale: displayScale
         )
     }
