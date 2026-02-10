@@ -21,6 +21,8 @@
 "widget_title" = "Daily affirmation";
 "widget_short_title" = "Today";
 "widget_description" = "A positive affirmation each day.";
+"audio_toggle_on" = "Turn sound on";
+"audio_toggle_off" = "Turn sound off";
 
 "pro_prompt_title" = "Go PRO";
 "pro_prompt_cta" = "See options";

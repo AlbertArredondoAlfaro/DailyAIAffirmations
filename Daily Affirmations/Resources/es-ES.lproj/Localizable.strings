@@ -21,6 +21,8 @@
 "widget_title" = "Afirmación diaria";
 "widget_short_title" = "Hoy";
 "widget_description" = "Una afirmación positiva cada día.";
+"audio_toggle_on" = "Activar sonido";
+"audio_toggle_off" = "Desactivar sonido";
 
 "pro_prompt_title" = "Hazte PRO";
 "pro_prompt_cta" = "Ver opciones";

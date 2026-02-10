@@ -18,6 +18,7 @@ final class AffirmationViewModel {
     private(set) var language: AffirmationLanguage
     private(set) var currentDate: Date
     var currentAffirmation: String
+    private var currentExpandedAffirmation: String
     private var currentIllustrationName: String
     var customName: String = ""
     var useCustomName: Bool = false
@@ -46,6 +47,8 @@ final class AffirmationViewModel {
             allowPlaceholders: savedUseName,
             calendar: calendar
         )
+        self.currentExpandedAffirmation = ""
+        refreshExpandedAffirmation()
     }
 
     var subtitle: String {
@@ -96,10 +99,7 @@ final class AffirmationViewModel {
     }
 
     var expandedAffirmation: String {
-        AffirmationExpansionGenerator.expand(
-            affirmation: displayAffirmation,
-            language: language
-        )
+        currentExpandedAffirmation
     }
 
     func saveCustomization(name: String, useName: Bool) {
@@ -125,6 +125,7 @@ final class AffirmationViewModel {
             calendar: calendar
         )
         currentIllustrationName = Self.illustrationNames[illustrationIndex]
+        refreshExpandedAffirmation()
     }
 
     var illustrationName: String {
@@ -138,6 +139,7 @@ final class AffirmationViewModel {
         )
         currentAffirmation = sanitizedAffirmation(candidate)
         currentIllustrationName = Self.illustrationNames.randomElement() ?? currentIllustrationName
+        refreshExpandedAffirmation()
     }
 
     private func loadCustomization() {
@@ -149,6 +151,13 @@ final class AffirmationViewModel {
         guard !useCustomName, value.contains("{name}") else { return value }
         let safeList = AffirmationSelector.catalog(for: language, allowPlaceholders: false)
         return safeList.randomElement() ?? value
+    }
+
+    private func refreshExpandedAffirmation() {
+        currentExpandedAffirmation = AffirmationExpansionGenerator.expand(
+            affirmation: displayAffirmation,
+            language: language
+        )
     }
 
     private static let illustrationNames: [String] = (1...20).map {
