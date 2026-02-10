@@ -16,7 +16,9 @@ final class AffirmationViewModel {
     private let defaults: UserDefaults
 
     private(set) var language: AffirmationLanguage
+    private(set) var currentDate: Date
     var currentAffirmation: String
+    private var currentIllustrationName: String
     var customName: String = ""
     var useCustomName: Bool = false
 
@@ -30,8 +32,16 @@ final class AffirmationViewModel {
         let savedUseName = defaults.bool(forKey: CustomizationDefaults.useNameKey)
         self.customName = savedName
         self.useCustomName = savedUseName
+        let now = Date()
+        self.currentDate = now
+        let illustrationIndex = AffirmationSelector.dailyIndex(
+            for: now,
+            count: Self.illustrationNames.count,
+            calendar: calendar
+        )
+        self.currentIllustrationName = Self.illustrationNames[illustrationIndex]
         self.currentAffirmation = AffirmationSelector.dailyAffirmation(
-            for: .now,
+            for: now,
             language: detectedLanguage,
             allowPlaceholders: savedUseName,
             calendar: calendar
@@ -101,6 +111,7 @@ final class AffirmationViewModel {
     }
 
     func loadDaily(date: Date = .now) {
+        currentDate = date
         let candidate = AffirmationSelector.dailyAffirmation(
             for: date,
             language: language,
@@ -108,6 +119,16 @@ final class AffirmationViewModel {
             calendar: calendar
         )
         currentAffirmation = sanitizedAffirmation(candidate)
+        let illustrationIndex = AffirmationSelector.dailyIndex(
+            for: date,
+            count: Self.illustrationNames.count,
+            calendar: calendar
+        )
+        currentIllustrationName = Self.illustrationNames[illustrationIndex]
+    }
+
+    var illustrationName: String {
+        currentIllustrationName
     }
 
     func randomize() {
@@ -116,6 +137,7 @@ final class AffirmationViewModel {
             allowPlaceholders: useCustomName
         )
         currentAffirmation = sanitizedAffirmation(candidate)
+        currentIllustrationName = Self.illustrationNames.randomElement() ?? currentIllustrationName
     }
 
     private func loadCustomization() {
@@ -127,5 +149,9 @@ final class AffirmationViewModel {
         guard !useCustomName, value.contains("{name}") else { return value }
         let safeList = AffirmationSelector.catalog(for: language, allowPlaceholders: false)
         return safeList.randomElement() ?? value
+    }
+
+    private static let illustrationNames: [String] = (1...20).map {
+        String(format: "AffirmationIllustration%02d", $0)
     }
 }
