@@ -11,28 +11,38 @@ import UIKit
 
 struct BannerAdContainer: View {
     let adUnitID: String
+    @StateObject private var trackingManager = TrackingAuthorizationManager.shared
 
     var body: some View {
-        HStack {
-            Spacer(minLength: 0)
-            BannerAdView(adUnitID: adUnitID)
-                .frame(width: AdSizeBanner.size.width,
-                       height: AdSizeBanner.size.height)
-            Spacer(minLength: 0)
+        Group {
+            if trackingManager.canRequestAds {
+                HStack {
+                    Spacer(minLength: 0)
+                    BannerAdView(
+                        adUnitID: adUnitID,
+                        isPersonalizedAllowed: trackingManager.isPersonalizedAdsAllowed
+                    )
+                    .frame(width: AdSizeBanner.size.width,
+                           height: AdSizeBanner.size.height)
+                    Spacer(minLength: 0)
+                }
+                .frame(maxWidth: .infinity)
+                .accessibilityHidden(true)
+            }
         }
-        .frame(maxWidth: .infinity)
-        .accessibilityHidden(true)
     }
 }
 
 private struct BannerAdView: UIViewRepresentable {
     let adUnitID: String
+    let isPersonalizedAllowed: Bool
 
     func makeUIView(context: Context) -> BannerView {
         let bannerView = BannerView(adSize: AdSizeBanner)
         bannerView.adUnitID = adUnitID
         bannerView.rootViewController = Self.findRootViewController()
-        bannerView.load(Request())
+        bannerView.load(AdRequestFactory.make(isPersonalizedAllowed: isPersonalizedAllowed))
+        context.coordinator.lastIsPersonalizedAllowed = isPersonalizedAllowed
         return bannerView
     }
 
@@ -40,6 +50,14 @@ private struct BannerAdView: UIViewRepresentable {
         if uiView.rootViewController == nil {
             uiView.rootViewController = Self.findRootViewController()
         }
+        if context.coordinator.lastIsPersonalizedAllowed != isPersonalizedAllowed {
+            context.coordinator.lastIsPersonalizedAllowed = isPersonalizedAllowed
+            uiView.load(AdRequestFactory.make(isPersonalizedAllowed: isPersonalizedAllowed))
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 
     private static func findRootViewController() -> UIViewController? {
@@ -48,5 +66,9 @@ private struct BannerAdView: UIViewRepresentable {
             .flatMap { $0.windows }
             .first { $0.isKeyWindow }?
             .rootViewController
+    }
+
+    final class Coordinator {
+        var lastIsPersonalizedAllowed: Bool?
     }
 }

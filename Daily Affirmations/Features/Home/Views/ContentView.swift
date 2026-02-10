@@ -21,6 +21,7 @@ struct ContentView: View {
     @State private var cardBackground = CardBackgroundGenerator.make()
     @StateObject private var proStore = ProStore()
     @StateObject private var audioManager = AudioManager.shared
+    private let adMobManager = AdMobManager.shared
     private let notificationManager = NotificationManager.shared
     private let maxContentWidth: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 540 : .infinity
     private let maxCardHeight: CGFloat = 500
@@ -69,14 +70,18 @@ struct ContentView: View {
         }
         .task {
             model.loadDaily()
+            await adMobManager.startIfNeeded()
             await notificationManager.bootstrap()
             audioManager.startIfNeeded()
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 model.loadDaily()
-                RewardedAdManager.shared.appDidBecomeActive()
                 audioManager.startIfNeeded()
+                Task {
+                    await adMobManager.startIfNeeded()
+                    await RewardedAdManager.shared.appDidBecomeActive()
+                }
                 Task {
                     await notificationManager.refreshIfNeeded()
                 }

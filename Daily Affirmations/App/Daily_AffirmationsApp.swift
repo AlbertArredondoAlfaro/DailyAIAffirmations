@@ -6,14 +6,9 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 
 @main
 struct Daily_AffirmationsApp: App {
-    init() {
-        MobileAds.shared.start(completionHandler: nil)
-    }
-
     var body: some Scene {
         WindowGroup {
             ContentView()
