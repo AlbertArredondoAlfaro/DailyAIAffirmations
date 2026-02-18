@@ -8,6 +8,7 @@
 import AppTrackingTransparency
 import Foundation
 import GoogleMobileAds
+import Combine
 
 @MainActor
 final class AdMobManager: ObservableObject {
@@ -31,11 +32,11 @@ final class AdMobManager: ObservableObject {
         guard !hasStarted else { return }
 
         let config = MobileAds.shared.requestConfiguration
-        config.maxAdContentRating = .pg
+        config.maxAdContentRating = .parentalGuidance
         config.tagForChildDirectedTreatment = false
         config.tagForUnderAgeOfConsent = false
 
-        MobileAds.shared.start(completionHandler: nil)
+        _ = await MobileAds.shared.start()
         hasStarted = true
     }
 
@@ -48,10 +49,11 @@ enum AdRequestFactory {
     static func make(isPersonalizedAllowed: Bool) -> Request {
         let request = Request()
         if !isPersonalizedAllowed {
-            let extras = GADExtras()
+            let extras = Extras()
             extras.additionalParameters = ["npa": "1"]
             request.register(extras)
         }
         return request
     }
 }
+
