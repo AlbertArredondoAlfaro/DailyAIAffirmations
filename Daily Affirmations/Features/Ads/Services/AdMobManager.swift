@@ -29,6 +29,12 @@ final class AdMobManager: ObservableObject {
 
         guard trackingManager.canRequestAds else { return }
         guard !hasStarted else { return }
+
+        let config = MobileAds.shared.requestConfiguration
+        config.maxAdContentRating = .pg
+        config.tagForChildDirectedTreatment = false
+        config.tagForUnderAgeOfConsent = false
+
         MobileAds.shared.start(completionHandler: nil)
         hasStarted = true
     }
