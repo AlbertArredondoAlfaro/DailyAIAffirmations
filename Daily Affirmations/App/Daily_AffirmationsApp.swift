@@ -11,6 +11,11 @@ import GoogleMobileAds
 @main
 struct Daily_AffirmationsApp: App {
     init() {
+        let adRequestConfiguration = MobileAds.shared.requestConfiguration
+        adRequestConfiguration.maxAdContentRating = .parentalGuidance
+        adRequestConfiguration.tagForChildDirectedTreatment = false
+        adRequestConfiguration.tagForUnderAgeOfConsent = false
+        
         MobileAds.shared.start(completionHandler: nil)
     }
 
