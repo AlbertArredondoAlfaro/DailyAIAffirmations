@@ -32,6 +32,8 @@
 "pro_title" = "PRO";
 "pro_subtitle" = "Quita anuncios y disfruta de una experiencia limpia y enfocada.";
 "pro_buy_mock" = "Pasar a PRO";
+"pro_buy_with_price" = "Pasar a PRO · %@";
+"pro_buy_loading" = "Cargando precio...";
 "pro_restore_mock" = "Restaurar compra";
 "pro_close" = "Cerrar";
 
