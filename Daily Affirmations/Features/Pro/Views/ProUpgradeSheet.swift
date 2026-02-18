@@ -12,6 +12,7 @@ struct ProUpgradeSheet: View {
     @ObservedObject var proStore: ProStore
     let onClose: () -> Void
     @State private var isErrorPresented = false
+    @State private var activeAction: ProAction?
 
     var body: some View {
         NavigationStack {
@@ -33,6 +34,8 @@ struct ProUpgradeSheet: View {
                     VStack(spacing: 12) {
                         Button {
                             Task {
+                                activeAction = .purchase
+                                defer { activeAction = nil }
                                 await proStore.purchase()
                                 if proStore.isPro {
                                     dismiss()
@@ -44,11 +47,12 @@ struct ProUpgradeSheet: View {
                                 Text(buyButtonTitle)
                                     .font(.system(.headline, design: .rounded))
                                     .fontWeight(.semibold)
-                                    .opacity(proStore.isProcessingPurchase ? 0 : 1)
+                                    .opacity(isLoadingPurchase ? 0 : 1)
 
-                                if proStore.isProcessingPurchase {
+                                if isLoadingPurchase {
                                     ProgressView()
                                         .progressViewStyle(.circular)
+                                        .tint(.black)
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -62,6 +66,8 @@ struct ProUpgradeSheet: View {
 
                         Button {
                             Task {
+                                activeAction = .restore
+                                defer { activeAction = nil }
                                 await proStore.restore()
                                 if proStore.isPro {
                                     dismiss()
@@ -73,11 +79,12 @@ struct ProUpgradeSheet: View {
                                 Text(NSLocalizedString("pro_restore_mock", comment: ""))
                                     .font(.system(.headline, design: .rounded))
                                     .fontWeight(.semibold)
-                                    .opacity(proStore.isProcessingPurchase ? 0 : 1)
+                                    .opacity(isLoadingRestore ? 0 : 1)
 
-                                if proStore.isProcessingPurchase {
+                                if isLoadingRestore {
                                     ProgressView()
                                         .progressViewStyle(.circular)
+                                        .tint(.black)
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -128,4 +135,17 @@ struct ProUpgradeSheet: View {
         let format = NSLocalizedString("pro_buy_with_price", comment: "")
         return String(format: format, price)
     }
+
+    private var isLoadingPurchase: Bool {
+        proStore.isProcessingPurchase && activeAction == .purchase
+    }
+
+    private var isLoadingRestore: Bool {
+        proStore.isProcessingPurchase && activeAction == .restore
+    }
+}
+
+private enum ProAction {
+    case purchase
+    case restore
 }
